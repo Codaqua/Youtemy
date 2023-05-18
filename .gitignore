@@ -1,0 +1,19 @@
+commands.txt
+.env.local
+
+/client/.next/
+/client/node_modules/
+
+# /client/.next/*
+# /client/node_modules/*
+# /client/.next/
+# /client/node_modules/
+# client/.next/
+# client/node_modules/
+
+# \client\.next\*
+# \client\node_modules\*
+# client\.next\*
+# client\node_modules\*
+# client\.next\
+# client\node_modules\

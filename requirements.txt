@@ -1,0 +1,7 @@
+npm install next@latest react@latest react-dom@latest
+# https://nextjs.org/docs/getting-started/installation
+
+npm i bootstrap
+
+npm i antd   # https://ant.design/docs/react/use-with-create-react-app-cn
+# similar to material UI, but more easy to use
