@@ -1,3 +1,6 @@
+# ---------- CLIENT ----------
+npm init -y
+
 npm install next@latest react@latest react-dom@latest
 # https://nextjs.org/docs/getting-started/installation
 
@@ -5,3 +8,19 @@ npm i bootstrap
 
 npm i antd   # https://ant.design/docs/react/use-with-create-react-app-cn
 # similar to material UI, but more easy to use
+
+npm i @ant-design/icons
+# https://ant.design/docs/spec/icon
+
+
+
+# ---------- SERVER ----------
+npm init -y
+
+npm i express
+
+
+
+
+# ---------- GLOBAL ----------
+npm i axios
