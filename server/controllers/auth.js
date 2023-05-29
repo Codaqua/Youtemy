@@ -72,3 +72,16 @@ export const logout = async (req, res) => {
     console.log(err);
   }
 };
+
+export const currentUser = async (req, res) => {
+  try {
+    // TODO : PENdiente verificar si es req.user o req.auth --> version express-jwt in middleware/index.js
+    // const user = await User.findById(req.user._id).select("-password").exec();
+    const user = await User.findById(req.auth._id).select("-password").exec();
+    console.log("CURRENT_USER", user);
+    return res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
