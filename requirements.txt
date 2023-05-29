@@ -4,7 +4,9 @@ npm init -y
 npm install next@latest react@latest react-dom@latest
 # https://nextjs.org/docs/getting-started/installation
 
-npm i bootstrap
+npm i bootstrap@4.6.0
+
+npm i express
 
 npm i antd   # https://ant.design/docs/react/use-with-create-react-app-cn
 # similar to material UI, but more easy to use
@@ -12,6 +14,11 @@ npm i antd   # https://ant.design/docs/react/use-with-create-react-app-cn
 npm i @ant-design/icons
 # https://ant.design/docs/spec/icon
 
+npm i react-toastify
+
+# Using proxy in development mode
+# http-proxy-middleware
+npm i http-proxy-middleware
 
 
 # ---------- SERVER ----------
@@ -19,8 +26,10 @@ npm init -y
 
 npm i express
 
-
+npm i jsonwebtoken
 
 
 # ---------- GLOBAL ----------
+#  
 npm i axios
+
