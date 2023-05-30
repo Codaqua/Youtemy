@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/credential-providers": "^3.341.0",
     "aws-sdk": "^2.1386.0",
+    "aws4": "^1.12.0",
     "bcrypt": "^5.0.1",
     "ci": "^2.2.0",
     "cookie-parser": "^1.4.6",
@@ -21,6 +23,7 @@
     "express": "^4.17.1",
     "express-jwt": "^8.4.1",
     "jsonwebtoken": "^9.0.0",
+    "mongodb-client-encryption": "^2.8.0",
     "mongoose": "^5.12.0",
     "morgan": "^1.10.0",
     "nanoid": "^2.1.11",

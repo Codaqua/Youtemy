@@ -6,7 +6,8 @@ import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
 import { useRouter } from "next/router";
-import user from "../../server/models/user";
+// remove next import - ERROR
+// import user from "../../server/models/user";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -41,6 +42,7 @@ const Register = () => {
       //  **
       // TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
       // toast.success("Registration successful. Please login.");
+      // *****************
       setName("");
       setEmail("");
       setPassword("");
