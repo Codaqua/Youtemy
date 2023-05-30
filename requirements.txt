@@ -36,6 +36,10 @@ npm i cookie-parser
 
 npm i express-jwt
 
+npm i aws-sdk
+
+npm i nanoid@2.1.11
+
 
 
 # ---------- GLOBAL ----------

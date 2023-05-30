@@ -1,5 +1,6 @@
 commands.txt
 .env.local
+.env
 
 /client/.next/
 /client/node_modules/

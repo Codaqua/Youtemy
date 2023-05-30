@@ -11,7 +11,7 @@ import user from "../../server/models/user";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("aaaa");
+  const [password, setPassword] = useState("asdf");
   const [loading, setLoading] = useState(false);
 
   const {
@@ -41,6 +41,9 @@ const Register = () => {
       //  **
       // TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
       // toast.success("Registration successful. Please login.");
+      setName("");
+      setEmail("");
+      setPassword("");
       setLoading(false);
     } catch (err) {
       // TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
