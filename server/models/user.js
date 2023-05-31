@@ -31,9 +31,6 @@ const userSchema = new Schema(
       enum: ["Student", "Tutor", "Admin"],
     },
     // TODO: remove if I do not implement the payment system
-    stripe_account_id: "",
-    stripe_seller: {},
-    stripeSession: {},
     passwordResetCode: {
       data: String,
       default: "",

@@ -36,33 +36,53 @@ const BecomeTutor = () => {
 
           // Update user role in the local storage
           window.localStorage.setItem("user", JSON.stringify(updatedUser));
+
+          // Fetch updated account status
+          fetchAccountStatus();
         }
       })
       .catch((err) => {
         console.log(err.response.status);
-        toast("Borrar onboarding failed. Try again.");
+        toast("Becoming tutor failed. Try again.");
         setLoading(false);
       });
   };
 
   // Add useEffect hook to update user role after becoming a tutor
-  useEffect(() => {
-    if (user && user.role && user.role.includes("Tutor")) {
-      // Fetch updated account status
-      // endpoint returns the updated user data.
-      axios.post("/api/get-account-status")
-        .then(res => {
-          dispatch({
-            type: "LOGIN",
-            payload: res.data,
-          });
-          window.localStorage.setItem("user", JSON.stringify(res.data));
-        })
-        .catch(err => {
-          console.log(err);
+  // useEffect(() => {
+  //   if (user && user.role && user.role.includes("Tutor")) {
+  //     // Fetch updated account status
+  //     // endpoint returns the updated user data.
+  //     axios.post("/api/get-account-status")
+  //       .then(res => {
+  //         dispatch({
+  //           type: "LOGIN",
+  //           payload: res.data,
+  //         });
+  //         window.localStorage.setItem("user", JSON.stringify(res.data));
+  //         window.location.href = "/tutor";
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }, [user]);
+
+  const fetchAccountStatus = () => {
+    axios.post("/api/get-account-status")
+      .then(res => {
+        dispatch({
+          type: "LOGIN",
+          payload: res.data,
         });
-    }
-  }, [user]);
+        window.localStorage.setItem("user", JSON.stringify(res.data));
+        // window.location.href = "/tutor";
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
 
   return (
     <>

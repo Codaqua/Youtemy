@@ -60,7 +60,6 @@ export const makeTutor = async (req, res) => {
 
     // 4. send email message to backend manager with the information that a new tutor has been added to the platform
 
-
     // new block of code to send an email to the backend manager
     const managerParams = {
       Source: process.env.EMAIL_FROM,
