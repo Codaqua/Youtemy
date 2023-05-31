@@ -60,8 +60,6 @@ export const makeTutor = async (req, res) => {
 
     // 4. send email message to backend manager with the information that a new tutor has been added to the platform
 
-    // After updating the user role to Tutor
-    await User.findByIdAndUpdate(user._id, { role: "Tutor" }).exec();
 
     // new block of code to send an email to the backend manager
     const managerParams = {
