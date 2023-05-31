@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Context } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 
-const UserIndex = () => {
+const WelcomeTutor = () => {
   const {
     state: { user },
   } = useContext(Context);
@@ -10,10 +10,13 @@ const UserIndex = () => {
   return (
     <UserRoute>
       <h1 className="jumbotron text-center square">
-        User dashboard
+        Welcome, {user ? user.name : "Loading"}!
       </h1>
+      <p className="lead text-center">
+        You're now a Tutor. You can start publishing your own courses.
+      </p>
     </UserRoute>
   );
 };
 
-export default UserIndex;
+export default WelcomeTutor;

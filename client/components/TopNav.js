@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext  } from "react";
 import { Menu } from "antd";
 import Link from "next/link";
+// TODO : ICONS
 import {
   HomeOutlined,
   CoffeeOutlined,
   LoginOutlined,
   LogoutOutlined,
   UserAddOutlined,
+  CarryOutOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 import { Context } from "../context";
 import axios from "axios";
@@ -46,6 +49,28 @@ const TopNav = () => {
           Home
         </Link>
       </Item>
+
+      {user && user.role && user.role.includes("Tutor") ? (
+        <Item
+          key="/tutor/course/create"
+          onClick={(e) => setCurrent(e.key)}
+          icon={<CarryOutOutlined />}
+        >
+          <Link href="/tutor/course/create">
+            Create a Course
+          </Link>
+        </Item>
+      ) : (
+        <Item
+          key="/user/become-tutor"
+          onClick={(e) => setCurrent(e.key)}
+          icon={<TeamOutlined />}
+        >
+          <Link href="/user/become-tutor">
+            Become Tutor
+          </Link>
+        </Item>
+      )}
 
       {user === null && (
         <>
@@ -93,52 +118,5 @@ const TopNav = () => {
     </Menu>
   );
 };
-
-
-
-//   return (
-//     <Menu mode="horizontal">
-//       <Item
-//         key="/"
-//         onClick={(e) => setCurrent(e.key)}
-//         icon={<HomeOutlined />}
-//       >
-//         <Link href="/">
-//           Home
-//         </Link>
-//       </Item>
-
-//       <Item
-//         key="/login"
-//         onClick={(e) => setCurrent(e.key)}
-//         icon={<LoginOutlined />}
-//       >
-//         <Link href="/login">
-//         Login
-//         </Link>
-//       </Item>
-
-//       <Item
-//         key="/register"
-//         onClick={(e) => setCurrent(e.key)}
-//         icon={<UserAddOutlined />}
-//       >
-//         <Link href="/register">
-//         Sign up
-//         </Link>
-//       </Item>
-
-//       <Item 
-//         key="/logout"
-//         onClick={logout} 
-//         icon={<LogoutOutlined />} 
-//         className="ml-auto"
-//       >
-//         Logout
-//       </Item>
-
-//     </Menu>
-//   );
-// };
 
 export default TopNav;

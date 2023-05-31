@@ -27,8 +27,8 @@ const userSchema = new Schema(
     },
     role: {
       type: [String],
-      default: ["Subscriber"],
-      enum: ["Subscriber", "Instructor", "Admin"],
+      default: ["Student"],
+      enum: ["Student", "Tutor", "Admin"],
     },
     // TODO: remove if I do not implement the payment system
     stripe_account_id: "",
