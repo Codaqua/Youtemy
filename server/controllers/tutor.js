@@ -22,7 +22,7 @@ export const makeTutor = async (req, res) => {
       await user.save();
     }
     
-// 3. send email message with confirmation that now has the role "Tutor" to user
+    // 3. send email message with confirmation that now has the role "Tutor" to user
 
     const params = {
       Source: process.env.EMAIL_FROM,
@@ -58,7 +58,7 @@ export const makeTutor = async (req, res) => {
         console.log(err);
       });
 
-  // 4. send email message to backend manager with the information that a new tutor has been added to the platform
+    // 4. send email message to backend manager with the information that a new tutor has been added to the platform
 
     // After updating the user role to Tutor
     await User.findByIdAndUpdate(user._id, { role: "Tutor" }).exec();
@@ -112,4 +112,34 @@ export const makeTutor = async (req, res) => {
     console.log("MAKE TUTOR ERR ", err);
     res.status(500).send({ error: "Failed to create tutor." });
   }
+};
+
+
+export const getAccountStatus = async (req, res) => {
+try {
+  // find user from db
+  const user = await User.findById(req.auth._id).exec();
+  
+  // if user does not have the role "Tutor", return Unauthorized
+  if(!user.role.includes("Tutor")) {
+    return res.status(401).send("Unauthorized");
+  } else {
+    // if user has the role "Tutor", update the user role in the db (if needed)
+    let updatedUser = { ...user._doc, role: "Tutor" };
+    await User.findByIdAndUpdate(
+      user._id,
+      {
+        $addToSet: { role: "Tutor" },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .exec();
+
+    res.json(updatedUser);
+  }
+} catch (err) {
+  console.log(err);
+  res.status(500).send("Error getting account status.");
+}
 };

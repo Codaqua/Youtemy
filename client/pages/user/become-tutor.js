@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Context } from "../../context";
 import { Button } from "antd";
 import axios from "axios";
@@ -8,7 +8,6 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 import { toast } from "react-toastify";
-import UserRoute from "../../components/routes/UserRoute";
 import { useRouter } from "next/router"; // import useRouter
 
 const BecomeTutor = () => {
@@ -34,6 +33,9 @@ const BecomeTutor = () => {
             type: "LOGIN",
             payload: updatedUser,
           });
+
+          // Update user role in the local storage
+          window.localStorage.setItem("user", JSON.stringify(updatedUser));
         }
       })
       .catch((err) => {
@@ -43,7 +45,24 @@ const BecomeTutor = () => {
       });
   };
 
-
+  // Add useEffect hook to update user role after becoming a tutor
+  useEffect(() => {
+    if (user && user.role && user.role.includes("Tutor")) {
+      // Fetch updated account status
+      // endpoint returns the updated user data.
+      axios.post("/api/get-account-status")
+        .then(res => {
+          dispatch({
+            type: "LOGIN",
+            payload: res.data,
+          });
+          window.localStorage.setItem("user", JSON.stringify(res.data));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }, [user]);
 
   return (
     <>
