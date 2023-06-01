@@ -76,6 +76,7 @@ const BecomeTutor = () => {
           payload: res.data,
         });
         window.localStorage.setItem("user", JSON.stringify(res.data));
+        console.log("Values of ", res);
         // window.location.href = "/tutor";
       })
       .catch(err => {

@@ -122,8 +122,17 @@ try {
     return res.status(401).send("Unauthorized");
   } else {
     // if user has the role "Tutor", update the user role in the db (if needed)
-    let updatedUser = { ...user._doc, role: "Tutor" };
-    await User.findByIdAndUpdate(
+    // let updatedUser = { ...user._doc, role: "Tutor" };
+    // await User.findByIdAndUpdate(
+    //   user._id,
+    //   {
+    //     $addToSet: { role: "Tutor" },
+    //   },
+    //   { new: true }
+    // )
+
+    // if user has the role "Tutor", update the user role in the db (if needed)
+    let updatedUser = await User.findByIdAndUpdate(
       user._id,
       {
         $addToSet: { role: "Tutor" },
@@ -139,4 +148,17 @@ try {
   console.log(err);
   res.status(500).send("Error getting account status.");
 }
+};
+
+export const currentTutor = async (req, res) => {
+  try {
+    let user = await User.findById(req.auth._id).select("-password").exec();
+    if (!user.role.includes("Tutor")) {
+      return res.sendStatus(403);
+    } else {
+      res.json({ ok: true });
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };

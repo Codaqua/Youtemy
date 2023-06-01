@@ -39,7 +39,7 @@ const TopNav = () => {
   };
   
   return (
-    <Menu mode="horizontal" selectedKeys={[current]}>
+    <Menu mode="horizontal" selectedKeys={[current]} className="mb-2">
       <Item
         key="/"
         onClick={(e) => setCurrent(e.key)}
@@ -98,13 +98,28 @@ const TopNav = () => {
 
 {/* TODO , Submenu to display it */}
 {/* TODO , cambiar CoffeeOutLined , ver las referencias */}
+
+      {user && user.role && user.role.includes("Tutor") && (
+        <Item
+          key="/tutor"
+          onClick={(e) => setCurrent(e.key)}
+          icon={<TeamOutlined />}
+          className="ml-auto"
+        >
+          <Link href="/tutor">
+            Tutor
+          </Link>
+        </Item>
+      )}
+
       {user !== null && (
         <SubMenu
           key="/submenu-user"
           icon={<CoffeeOutlined />}
           title={user && user.name }
-          className="ml-auto"
+          className="float-right"
         >
+          {/* Cambio ml-auto por float-right */}
           <ItemGroup>
             <Item key="/user">
               <Link href="/user">
@@ -115,6 +130,9 @@ const TopNav = () => {
           </ItemGroup>
         </SubMenu>
       )}
+
+
+  
     </Menu>
   );
 };
