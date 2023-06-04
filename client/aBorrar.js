@@ -1,17 +1,4 @@
-{
-  "name": "client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "next start"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+"dependencies": {
     "@ant-design/icons": "^5.1.0",
     "antd": "^4.24.10",
     "axios": "^1.4.0",
@@ -24,4 +11,3 @@
     "react-image-file-resizer": "^0.4.8",
     "react-toastify": "^9.1.3"
   }
-}

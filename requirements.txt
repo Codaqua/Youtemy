@@ -20,6 +20,8 @@ npm i react-toastify
 # http-proxy-middleware
 npm i http-proxy-middleware
 
+npm i react-image-file-resizer
+
 
 # ---------- SERVER ----------
 npm init -y
