@@ -30,19 +30,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "../public/css/styles.css";
 import dynamic from 'next/dynamic';
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 // Dynamic import with no SSR
-// const DynamicToastContainer = dynamic(() => import('react-toastify').then((mod) => mod.ToastContainer), { ssr: false });
+const DynamicToastContainer = dynamic(() => import('react-toastify').then((mod) => mod.ToastContainer), { ssr: false });
+
 
 import { Provider } from "../context";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider>
-      {/* <DynamicToastContainer position="top-center" /> */}
-      {/* <ToastContainer position="top-center" /> */}
+      <DynamicToastContainer position="top-center" />
       <TopNav />
       <Component {...pageProps} />
     </Provider>
