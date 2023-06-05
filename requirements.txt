@@ -44,6 +44,8 @@ npm i nanoid@2.1.11
 
 npm i query-string@7.0.0
 
+npm i slugify
+
 
 
 # ---------- GLOBAL ----------

@@ -5,6 +5,8 @@ commands.txt
 /client/.next/
 /client/node_modules/
 /client/.env.local
+/client/aBorrar.js
 
 /server/node_modules/
 /server/.env
+/server/aBORRAR.js

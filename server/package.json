@@ -28,6 +28,7 @@
     "morgan": "^1.10.0",
     "nanoid": "^2.1.11",
     "nodemon": "^2.0.7",
-    "query-string": "^7.0.0"
+    "query-string": "^7.0.0",
+    "slugify": "^1.6.6"
   }
 }
