@@ -6,3 +6,43 @@
   background-image: linear-gradient(to right, #007bff, #000);
   color: #fff;
 }
+
+.square-avatar {
+  border-radius: 0px !important; /* Remove rounded borders */
+  object-fit: cover !important; /* Resize your image to fit the container */
+  width: 140px !important; /* You can change this */
+  height: 100px !important; /* And this to match your needs */
+  line-height: 100px !important; /* Adjust to match height */
+  font-size: 18px !important; /* Adjust if necessary */
+  transition: transform 0.2s; /* Animation */
+  border: 4px solid red; /* Frame */
+  display: flex;
+  align-items: center; /* This will center items vertically */
+  /* margin-bottom: 0px; */
+  margin-bottom: 10px;
+  /* margin-top: -10px; */
+  margin-left: 10px;
+}
+
+/* .square-avatar:hover {
+  transform: scale(1.1); 
+} */
+
+.course-list {
+  display: flex;
+  align-items: center; /* This will center items vertically */
+  background-color: grey;
+  border: 4px solid blue;
+  margin: 1rem;
+  width: 100%;
+  margin: 0px;
+  /* padding: 200px 0px 10px; */
+}
+
+.vertical-align {
+  /* background-color: black; */
+  display: flex;
+  align-items: center; /* This will center items vertically */
+  width: 100%; 
+  margin-bottom: 20px;
+}

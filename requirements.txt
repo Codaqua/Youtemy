@@ -22,6 +22,7 @@ npm i http-proxy-middleware
 
 npm i react-image-file-resizer
 
+npm i react-markdown
 
 # ---------- SERVER ----------
 npm init -y

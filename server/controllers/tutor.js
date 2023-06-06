@@ -1,4 +1,5 @@
 import User from "../models/user";
+import Course from "../models/course";
 import AWS from 'aws-sdk';
 require('dotenv').config();
 
@@ -158,6 +159,17 @@ export const currentTutor = async (req, res) => {
     } else {
       res.json({ ok: true });
     }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const tutorCourses = async (req, res) => {
+  try {
+    const courses = await Course.find({ tutor: req.auth._id })
+      .sort({ createdAt: -1 })
+      .exec();
+    res.json(courses);
   } catch (err) {
     console.log(err);
   }
