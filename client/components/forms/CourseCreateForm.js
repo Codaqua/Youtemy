@@ -19,140 +19,150 @@ const CourseCreateForm = ({
   setValues,
   preview,
   uploadButtonText,
-  handleImageRemove,
+  handleImageRemove = (f) => f,
+  editPage = false,
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      
-      <div className="form-row">
-        <div className="form-group col-md">
-          <Select
-            style={{ width: "100%" }}
-            size="large"
-            value={values.university || undefined}
-            placeholder="Select a University"
-            onChange={(v) => setValues({ ...values, university: v })}
-          >
-            {university.map((c) => (
-              <Option key={c} value={c}>
-                {c}
-              </Option>
-            ))}
-          </Select>
-        </div>
+    <>
+      {values && (
+        <form onSubmit={handleSubmit}>
+          
+          <div className="form-row">
+            <div className="form-group col-md">
+              <Select
+                style={{ width: "100%" }}
+                size="large"
+                value={values.university || undefined}
+                placeholder="Select a University"
+                onChange={(v) => setValues({ ...values, university: v })}
+              >
+                {university.map((c) => (
+                  <Option key={c} value={c}>
+                    {c}
+                  </Option>
+                ))}
+              </Select>
+            </div>
 
-        <div className="form-group col-md">
-          <Select
-            style={{ width: "100%" }}
-            size="large"
-            value={values.degree || undefined}
-            placeholder="Select a Degree"
-            onChange={(v) => setValues({ ...values, degree: v })}
-          >
-            {degree.map((c) => (
-              <Option key={c} value={c}>
-                {c}
-              </Option>
-            ))}
-          </Select>
-        </div>
+            <div className="form-group col-md">
+              <Select
+                style={{ width: "100%" }}
+                size="large"
+                value={values.degree || undefined}
+                placeholder="Select a Degree"
+                onChange={(v) => setValues({ ...values, degree: v })}
+              >
+                {degree.map((c) => (
+                  <Option key={c} value={c}>
+                    {c}
+                  </Option>
+                ))}
+              </Select>
+            </div>
 
-        <div className="form-group col-md-1">
-          <Select
-            style={{ width: "100%" }}
-            size="large"
-            value={values.year || undefined}
-            placeholder="Select a Year"
-            onChange={(v) => setValues({ ...values, year: v })}
-          >
-            {year.map((c) => (
-              <Option key={c} value={c}>
-                {c}
-              </Option>
-            ))}
-          </Select>
-        </div>
+            <div className="form-group col-md-1">
+              <Select
+                style={{ width: "100%" }}
+                size="large"
+                value={values.year || undefined}
+                placeholder="Select a Year"
+                onChange={(v) => setValues({ ...values, year: v })}
+              >
+                {year.map((c) => (
+                  <Option key={c} value={c}>
+                    {c}
+                  </Option>
+                ))}
+              </Select>
+            </div>
 
-        <div className="form-group col-md">
-          <Select
-            style={{ width: "100%" }}
-            size="large"
-            value={values.subject || undefined}
-            placeholder="Select a Subject"
-            onChange={(v) => setValues({ ...values, subject: v })}
-          >
-            {subject.map((c) => (
-              <Option key={c} value={c}>
-                {c}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      </div>
-
-      {/* ********* */}
-
-      <div className="form-group">
-        <input
-          type="text"
-          name="name"
-          className="form-control"
-          placeholder="Name"
-          value={values.name}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="form-group">
-        <textarea
-          name="description"
-          cols="7"
-          rows="7"
-          value={values.description}
-          className="form-control"
-          onChange={handleChange}
-        ></textarea>
-      </div>
-
-      <div className="form-row">
-        <div className="col">
-          <div className="form-group">
-            <label className="btn btn-outline-secondary btn-block text-left">
-              {uploadButtonText}
-              <input
-                type="file"
-                name="image"
-                onChange={handleImage}
-                accept="image/*"
-                hidden
-              />
-            </label>
+            <div className="form-group col-md">
+              <Select
+                style={{ width: "100%" }}
+                size="large"
+                value={values.subject || undefined}
+                placeholder="Select a Subject"
+                onChange={(v) => setValues({ ...values, subject: v })}
+              >
+                {subject.map((c) => (
+                  <Option key={c} value={c}>
+                    {c}
+                  </Option>
+                ))}
+              </Select>
+            </div>
           </div>
-        </div>
 
-        {preview && (
-          <Badge count="X" onClick={handleImageRemove} className="pointer">
-            <Avatar width={200} src={preview} />
-          </Badge>
-        )}
-      </div>
+          {/* ********* */}
 
-      <div className="row">
-        <div className="col">
-          <Button
-            onClick={handleSubmit}
-            disabled={values.loading || values.uploading}
-            className="btn btn-primary"
-            loading={values.loading}
-            type="primary"
-            size="large"
-            shape="round"
-          >
-            {values.loading ? "Saving..." : "Save & Continue"}
-          </Button>
-        </div>
-      </div>
-    </form>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              className="form-control"
+              placeholder="Name"
+              value={values.name}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <textarea
+              name="description"
+              cols="7"
+              rows="7"
+              value={values.description}
+              className="form-control"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="form-row">
+            <div className="col">
+              <div className="form-group">
+                <label className="btn btn-outline-secondary btn-block text-left">
+                  {uploadButtonText}
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleImage}
+                    accept="image/*"
+                    hidden
+                  />
+                </label>
+              </div>
+            </div>
+
+            {preview && (
+              <Badge count="X" onClick={handleImageRemove} className="pointer">
+                <Avatar width={200} src={preview} />
+              </Badge>
+            )}
+
+            {editPage && values.image && (
+              <Avatar width={200} src={values.image.Location} />
+            )}
+
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <Button
+                onClick={handleSubmit}
+                disabled={values.loading || values.uploading}
+                className="btn btn-primary"
+                loading={values.loading}
+                type="primary"
+                size="large"
+                shape="round"
+              >
+                {values.loading ? "Saving..." : "Save & Continue"}
+              </Button>
+            </div>
+          </div>
+        </form>
+      )}
+    </>
   );
 };
 

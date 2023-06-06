@@ -4,9 +4,9 @@ const AddLessonForm = ({
   values,
   setValues,
   handleAddLesson,
+  handleUrlChange,
+  addUrlField,
   uploading,
-  uploadButtonText,
-  handleVideo,
 }) => {
   return (
     <div className="container pt-3">
@@ -30,10 +30,21 @@ const AddLessonForm = ({
           placeholder="Content"
         ></textarea>
 
-        <label className="btn btn-dark btn-block text-left mt-3">
-          {uploadButtonText}
-          <input onChange={handleVideo} type="file" accept="video/*" hidden />
-        </label>
+        {values.videos.map((videoUrl, index) => (
+          <div key={index} className="mb-2">
+            <input
+              type="url"
+              className="form-control"
+              onChange={(e) => handleUrlChange(e, index)}
+              value={videoUrl}
+              placeholder="YouTube URL"
+              required
+            />
+          </div>
+        ))}
+
+        <Button className="btn btn-outline-dark btn-block mt-2" onClick={addUrlField}>+ Add another video to this lesson</Button>
+
 
         <Button
           onClick={handleAddLesson}

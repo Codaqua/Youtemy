@@ -28,7 +28,7 @@ const TutorIndex = () => {
 
       {courses &&
         courses.map((course) => (
-          <div>
+          <div  key={course._id}>
             <Link className="vertical-align" href={`/tutor/course/view/${course.slug}`} key={course._id} passHref>
               <div className="media pt-2 course-list" role="link" tabIndex={0}>
                 <Avatar

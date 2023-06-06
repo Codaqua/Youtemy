@@ -105,3 +105,50 @@ export const read = async (req, res) => {
     console.log(err);
   }
 };
+
+export const addLesson = async (req, res) => {
+  try {
+    const { slug, tutorId } = req.params;
+    const { title, content, videos } = req.body;
+
+    if (req.auth._id != tutorId) {
+      return res.status(400).send("Unauthorized");
+    }
+
+    const updated = await Course.findOneAndUpdate(
+      { slug },
+      {
+        $push: { lessons: { title, content, videos, slug: slugify(title) } },
+      },
+      { new: true }
+    )
+      .populate("tutor", "_id name")
+      .exec();
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Add lesson failed");
+  }
+};
+
+
+export const update = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    // console.log(slug);
+    const course = await Course.findOne({ slug }).exec();
+    // console.log("COURSE FOUND => ", course);
+    if (req.auth._id != course.tutor) {
+      return res.status(400).send("Unauthorized");
+    }
+
+    const updated = await Course.findOneAndUpdate({ slug }, req.body, {
+      new: true,
+    }).exec();
+
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err.message);
+  }
+};
