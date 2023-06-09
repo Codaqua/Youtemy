@@ -6,7 +6,17 @@ const router = express.Router();
 import { requireSignin, isTutor } from "../middlewares";
 
 // controllers
-import { uploadImage, removeImage, create, read, addLesson, update } from "../controllers/course";
+import { 
+    uploadImage, 
+    removeImage, 
+    create, 
+    update, 
+    read, 
+    addLesson, 
+    removeLesson, 
+    removeVideo, 
+    updateLesson, 
+} from "../controllers/course";
 
 // image
 router.post("/course/upload-image", uploadImage);
@@ -17,5 +27,25 @@ router.put("/course/:slug", requireSignin, update);
 router.get("/course/:slug", read);
 
 router.post("/course/lesson/:slug/:tutorId", requireSignin, addLesson);
+// lessons
+// add lessons
+router.post("/course/lesson/:courseId", requireSignin, addLesson);
+
+// delete
+router.put("/course/:slug/:lessonId", requireSignin, removeLesson);
+// router.post("/course/:courseId/:lessonId", requireSignin, removeLesson);
+
+// update
+router.put("/course/lesson/:slug/:lessonId", requireSignin, updateLesson);
+// router.put("/course/lesson/:courseId/:lessonId", requireSignin, updateLesson);
+// router.put("/course/:slug/:lessonId", requireSignin, updateLesson);
+
+// remove video
+router.put("/course/:slug/:lessonId/:videoUrl", requireSignin, removeVideo);
+
+
+
+
+
 
 module.exports = router;

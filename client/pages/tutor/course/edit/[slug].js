@@ -5,7 +5,9 @@ import CourseCreateForm from "../../../../components/forms/CourseCreateForm";
 import Resizer from "react-image-file-resizer";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { List, Avatar } from "antd";
+import { List, Avatar, Modal } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import UpdateLessonForm from "../../../../components/forms/UpdateLessonForm";
 
 const { Item } = List;
 
@@ -25,6 +27,12 @@ const CourseEdit = () => {
   const [image, setImage] = useState({});
   const [preview, setPreview] = useState("");
   const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
+
+
+  // state for lessons update
+  const [visible, setVisible] = useState(false);
+  // const [current, setCurrent] = useState({});
+  const [current, setCurrent] = useState({ videos: [] });
 
   // router
   const router = useRouter();
@@ -124,6 +132,139 @@ const CourseEdit = () => {
     toast("Lessons rearranged successfully");
   };
 
+  // Delete lesson
+  const handleDelete = async (index) => {
+    // TODO : implement confirmation modal
+    //  https://ant.design/components/modal
+    const answer = window.confirm("Are you sure you want to delete?");
+    if (!answer) return;
+    let allLessons = values.lessons;
+    const removed = allLessons.splice(index, 1);
+    // console.log("removed", removed[0]._id);
+    setValues({ ...values, lessons: allLessons });
+    // send request to server
+    const { data } = await axios.put(`/api/course/${slug}/${removed[0]._id}`);
+    console.log("LESSON DELETED =>", data);
+  };
+
+  /**
+   * lesson update functions
+   */
+
+  const extractVideoId = (url) => {
+    if(!url) return null;
+    
+    const urlObj = new URL(url);
+    const hostname = urlObj.hostname;
+    
+    if (hostname === 'youtu.be') {
+      return urlObj.pathname.slice(1);
+    }
+  
+    if (hostname === 'www.youtube.com' || hostname === 'youtube.com') {
+      if (urlObj.pathname === '/watch') {
+        return urlObj.searchParams.get('v');
+      }
+  
+      if (urlObj.pathname.startsWith('/embed/')) {
+        return urlObj.pathname.split('/')[2];
+      }
+  
+      if (urlObj.pathname.startsWith('/v/')) {
+        return urlObj.pathname.split('/')[2];
+      }
+    }
+    
+    return null; // return null if the format is not recognized
+  };
+
+  // const buildYouTubeUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
+  const buildYouTubeUrl = (videoId) => `https://img.youtube.com/vi/${videoId}/0.jpg`;
+
+  // const handleUrlChange = (e, index) => {
+  //   let newValues = [...values.lessons];
+  //   newValues[index].video = e.target.value;
+  //   setValues({ ...values, lessons: newValues });
+  // };
+
+  // const handleUrlChange = (e, index) => {
+  //   let newVideos = [...current.videos];
+  //   newVideos[index] = e.target.value;
+  //   setCurrent({ ...current, videos: newVideos });
+  // };
+
+  const addUrlField = () => {
+    setCurrent({ ...current, videos: [...current.videos, ''], });
+  };
+
+  // const removeUrlField = (index) => {
+  //   let newValues = [...values.lessons];
+  //   newValues.splice(index, 1);
+  //   setValues({ ...values, lessons: newValues });
+  // };
+  // const removeUrlField = (index) => {
+  //   let newVideos = [...current.videos];
+  //   newVideos.splice(index, 1);
+  //   setCurrent({ ...current, videos: newVideos });
+  // };
+
+  const handleRemoveVideo = async (index) => {
+    const videoUrl = current.videos[index];
+    try {
+      // const response = await axios.put(`/api/course/${slug}/${current._id}/${current.videos[index]}`);
+      console.log("handleRemoveVideo try");
+      console.log("slug",`${slug}`);
+      console.log("current._id", `${current._id}`);
+      console.log("videoUrl", `${videoUrl}`);
+      
+      const response = await axios.put(`/api/course/${slug}/${current._id}/${videoUrl}`);
+      console.log('Video removed', response);
+      setCurrent({ ...current, videos: current.videos.filter((v, i) => i !== index) });
+    } catch (error) {
+      console.log("handleRemoveVideo try");
+      console.log(error);
+    }
+  };
+
+  const handleUpdateLesson = async (e) => {
+    e.preventDefault();
+   
+    try {
+      console.log("handleUpdateLesson try", `${slug}, ${values._id}, ${current._id}`);
+      // videoIds = current.videos.map(url => extractVideoId(url)); // convert URLs to videoIds
+      // const { data } = await axios.put(
+      //   `/api/course/lesson/${slug}/${lesson._id}`,
+      //   { ...values, videos: videoIds } // replace URLs with videoIds
+      // );
+      const { data } = await axios.put(
+        // `/api/course/lesson/${values._id}/${current._id}`,
+        // current
+        `/api/course/lesson/${slug}/${current._id}`,
+        current
+        // {
+        //   title: current.title,
+        //   content: current.content,
+        //   videos: current.videos
+        // }
+      );
+
+      setVisible(false);
+      // update lessons
+      if (data.ok) {
+        let arr = values.lessons;
+        const index = arr.findIndex((el) => el._id === current._id);
+        arr[index] = current;
+        setValues({ ...values, lessons: arr });
+        toast("Lesson updated");
+        // setCourse(data);
+      }
+    } catch (err) {
+        toast("Lesson update failed");
+    }
+  };
+
+  
+
   return ( 
     <TutorRoute>
       <h1 className="jumbotron text-center square">Update Course</h1>
@@ -139,6 +280,8 @@ const CourseEdit = () => {
           uploadButtonText={uploadButtonText}
           handleImageRemove={handleImageRemove}
           editPage={true}
+          buildYouTubeUrl={buildYouTubeUrl}
+          // videoUrl={buildYouTubeUrl(current)} // replace videoId with the actual id from the data
         />
       </div>
       {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
@@ -161,15 +304,48 @@ const CourseEdit = () => {
                 onDrop={(e) => handleDrop(e, index)}
               >
 
-                <Item.Meta
+              <Item.Meta
+                  onClick={() => {
+                    setVisible(true);
+                    setCurrent(item);
+                  }}
                   avatar={<Avatar>{index + 1}</Avatar>}
                   title={item.title}
                 ></Item.Meta>
+
+                <DeleteOutlined
+                  onClick={() => handleDelete(index)}
+                  className="text-danger float-right"
+                />
+
               </Item>
             )}
           ></List>
         </div>
       </div>
+      
+      <Modal
+        title="Update lesson"
+        centered
+        open={visible}
+        onCancel={() => setVisible(false)}
+        footer={null}
+      >
+        {/* <pre>{JSON.stringify(current, null, 4)}</pre> */}
+        <UpdateLessonForm
+          current={current}
+          setCurrent={setCurrent}
+          handleUpdateLesson={handleUpdateLesson}
+          addUrlField={addUrlField}
+          // handleUrlChange={handleUrlChange}
+          // removeUrlField={removeUrlField}
+          // uploading={uploading}
+          handleRemoveVideo={handleRemoveVideo}
+          extractVideoId={extractVideoId}
+          buildYouTubeUrl={buildYouTubeUrl}
+  />
+      </Modal>
+
 
     </TutorRoute>
   );

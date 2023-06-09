@@ -32,8 +32,6 @@ app.use(express.json({limit: '5mb'}));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-// route
-readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
 
 // csrf
 app.use(csrfProtection);
@@ -41,6 +39,11 @@ app.use(csrfProtection);
 app.get("/api/csrf-token", (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
+
+
+// route
+readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
+
 
 // port
 const port = process.env.PORT || 8000;

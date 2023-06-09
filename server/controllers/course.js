@@ -138,6 +138,7 @@ export const update = async (req, res) => {
     // console.log(slug);
     const course = await Course.findOne({ slug }).exec();
     // console.log("COURSE FOUND => ", course);
+    // TODO : NO PUSE course.tutor._id
     if (req.auth._id != course.tutor) {
       return res.status(400).send("Unauthorized");
     }
@@ -150,5 +151,83 @@ export const update = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
+  }
+};
+
+ 
+export const removeLesson = async (req, res) => {
+  const { slug, lessonId } = req.params;
+  const course = await Course.findOne({ slug }).exec();
+  if (req.auth._id != course.tutor) {
+    return res.status(400).send("Unauthorized");
+  }
+
+  const deletedCourse = await Course.findByIdAndUpdate(course._id, {
+    $pull: { lessons: { _id: lessonId } },
+  }).exec();
+
+  res.json({ ok: true });
+};
+
+
+
+export const removeVideo = async (req, res) => {
+  try {
+    const { slug, lessonId, videoUrl } = req.params;
+ 
+    const course = await Course.findOne({ slug }).exec();
+
+    if (req.auth._id != course.tutor._id || req.auth._id != course.tutor ) {
+      return res.status(400).send("Unauthorized");
+    }
+  
+    const updatedCourse = await Course.findOneAndUpdate(
+      { 'lessons._id': lessonId, 'lessons.videos': videoUrl },
+      { $pull: { 'lessons.$.videos': videoUrl } },
+      { new: true }
+    ).exec();
+  
+    console.log('updatedCourse:', updatedCourse);
+  
+    res.json(updatedCourse);
+  } catch (err) {
+    console.log("removeLesson", err);
+    return res.status(400).send(err.message);
+  }
+};
+
+export const updateLesson = async (req, res) => {
+  try {
+    // console.log("UPDATE LESSON", req.body);
+    const { slug, courseId, lessonId, tutorId  } = req.params;
+    const { _id, title, content, videos } = req.body;
+    // find post
+    // const courseFound = await Course.findById(courseId)
+    const course = await Course.findOne({ slug })
+    .select("tutor")
+    .exec();
+    // is owner?
+   
+    if (course.tutor._id != req.auth._id) {
+      return res.status(400).send("Unauthorized");
+    }
+   
+    const updated = await Course.updateOne(
+      // { "lessons._id": lessonId },
+      { "lessons._id": _id },
+      {
+        $set: {
+          "lessons.$.title": title,
+          "lessons.$.content": content,
+          'lessons.$.videos': videos,
+        },
+      },
+      { new: true }
+    ).exec();
+    console.log("updated => ", updated);
+    res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(`Update lesson failed: ${err.message}`);
   }
 };

@@ -37,12 +37,50 @@ const CourseView = () => {
   };
 
   // FUNCTIONS FOR ADD LESSON
+  const extractVideoId = (url) => {
+    const urlObj = new URL(url);
+    const hostname = urlObj.hostname;
+    
+    if (hostname === 'youtu.be') {
+      return urlObj.pathname.slice(1);
+    }
+  
+    if (hostname === 'www.youtube.com' || hostname === 'youtube.com') {
+      if (urlObj.pathname === '/watch') {
+        return urlObj.searchParams.get('v');
+      }
+  
+      if (urlObj.pathname.startsWith('/embed/')) {
+        return urlObj.pathname.split('/')[2];
+      }
+  
+      if (urlObj.pathname.startsWith('/v/')) {
+        return urlObj.pathname.split('/')[2];
+      }
+    }
+    
+    return null; // return null if the format is not recognized
+  };
+
+
+
   const handleAddLesson = async (e) => {
     try {
+      // TODO : ELIMINAR VIDEOS DUPLICADOS
+      // const videoIds = values.videos.map(url => extractVideoId(url)); // convert URLs to videoIds
+      const videoIdsSet = new Set(values.videos.map(url => extractVideoId(url))); 
+      const videoIds = Array.from(videoIdsSet); // Convert Set back to an array
+
+
+      // const { data } = await axios.post(
+      //   `/api/course/lesson/${slug}/${course.tutor._id}`,
+      //   values
+      // );
       const { data } = await axios.post(
         `/api/course/lesson/${slug}/${course.tutor._id}`,
-        values
+        { ...values, videos: videoIds } // replace URLs with videoIds
       );
+
       // console.log(data)
       setValues({ ...values, title: "", content: "", video: [""] });
       setVisible(false);
@@ -56,12 +94,6 @@ const CourseView = () => {
     }
   };
 
-  // TODO : PENDIENTE DE ELIMINAR
-  // const handleVideo = (e) => {
-  //   const file = e.target.files[0];
-  //   setUploadButtonText(file.name);
-  //   console.log("handle video upload");
-  // };
 
   const handleUrlChange = (e, index) => {
     const updatedUrls = [...values.videos];
