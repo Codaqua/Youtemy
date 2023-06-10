@@ -71,3 +71,58 @@
 .bluex {
   background: #ff0033;
 }
+
+/* Styles for SingleCourse page */
+
+.lessons-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.content-container {
+  padding-right: 0;
+}
+
+iframe {
+  width: 100%;
+}
+
+.lesson-item {
+  cursor: pointer;
+}
+
+.lesson-item:hover {
+  background-color: #f0f0f0;
+}
+
+.active-lesson {
+  background-color: #e6f7ff;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* for 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.no-videos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: #ff0033;
+  font-weight: bolder;
+  font-size: larger;
+}
