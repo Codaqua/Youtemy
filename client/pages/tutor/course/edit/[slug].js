@@ -310,7 +310,7 @@ const CourseEdit = () => {
                     setCurrent(item);
                   }}
                   avatar={<Avatar>{index + 1}</Avatar>}
-                  title={item.title}
+                  title={`${index + 1}. ${item.title}`}
                 ></Item.Meta>
 
                 <DeleteOutlined

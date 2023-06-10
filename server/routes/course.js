@@ -16,7 +16,13 @@ import {
     removeLesson, 
     removeVideo, 
     updateLesson, 
+    publishCourse,
+    unpublishCourse,
+    courses
 } from "../controllers/course";
+
+
+router.get("/courses", courses);
 
 // image
 router.post("/course/upload-image", uploadImage);
@@ -31,6 +37,12 @@ router.post("/course/lesson/:slug/:tutorId", requireSignin, addLesson);
 // add lessons
 router.post("/course/lesson/:courseId", requireSignin, addLesson);
 
+
+// publish unpublish
+router.put("/course/publish/:courseId", requireSignin, publishCourse);
+router.put("/course/unpublish/:courseId", requireSignin, unpublishCourse);
+
+
 // delete
 router.put("/course/:slug/:lessonId", requireSignin, removeLesson);
 // router.post("/course/:courseId/:lessonId", requireSignin, removeLesson);
@@ -42,6 +54,8 @@ router.put("/course/lesson/:slug/:lessonId", requireSignin, updateLesson);
 
 // remove video
 router.put("/course/:slug/:lessonId/:videoUrl", requireSignin, removeVideo);
+
+
 
 
 
