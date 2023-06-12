@@ -24,22 +24,24 @@ const LessonContent = ({ lesson }) => {
 
 
 
-            {/* <div className="video-container">
-            {lesson.videos.map((videoId, index) => (
-                <div key={index} className="mb-3">
-                <iframe
-                    width="100%"
-                    // height="315"
-                    height="315"
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    frameBorder="0"
-                    allowFullScreen
-                ></iframe>
-                </div>
-            ))}
-            </div> */}
+       
         </div>
     );
   };
   
   export default LessonContent;
+
+    //    {/* <div className="video-container">
+    //         {lesson.videos.map((videoId, index) => (
+    //             <div key={index} className="mb-3">
+    //             <iframe
+    //                 width="100%"
+    //                 // height="315"
+    //                 height="315"
+    //                 src={`https://www.youtube.com/embed/${videoId}`}
+    //                 frameBorder="0"
+    //                 allowFullScreen
+    //             ></iframe>
+    //             </div>
+    //         ))}
+    //         </div> */}

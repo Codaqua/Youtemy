@@ -54,7 +54,7 @@ const SingleCourse = () => {
   //     }
   //   }
   // };
-  
+
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/user/course/${slug}`);
     setCourse(data);
@@ -72,13 +72,34 @@ const SingleCourse = () => {
 
 
 
+  // const loadCompletedLessons = async () => {
+  //   const { data } = await axios.post(`/api/list-completed`, {
+  //     courseId: course._id,
+  //   });
+  //   console.log("COMPLETED LESSONS => ", data);
+  //   setCompletedLessons(data);
+  // };
+
   const loadCompletedLessons = async () => {
-    const { data } = await axios.post(`/api/list-completed`, {
-      courseId: course._id,
-    });
-    console.log("COMPLETED LESSONS => ", data);
-    setCompletedLessons(data);
-  };
+    try {
+        const { data } = await axios.post(`/api/list-completed`, {
+            courseId: course._id,
+        });
+        console.log("COMPLETED LESSONS => ", data);
+        setCompletedLessons(data);
+
+        // Find the first lesson that is not completed
+        for (let i = 0; i < course.lessons.length; i++) {
+            if (!data.includes(course.lessons[i]._id)) {
+                setClicked(i);
+                setActiveLesson(course.lessons[i]);
+                break;
+            }
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
 
  
   // const markCompleted = async (lessonId) => {
@@ -100,19 +121,36 @@ const SingleCourse = () => {
     loadCourse();
   };
   
+  // const markIncompleted = async (lessonId) => {
+  //   try {
+  //     const { data } = await axios.post(`/api/mark-incomplete`, {
+  //       courseId: course._id,
+  //       lessonId,
+  //     });
+  //     console.log(data);
+  //     loadCourse();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const markIncompleted = async (lessonId) => {
     try {
-      const { data } = await axios.post(`/api/mark-incomplete`, {
-        courseId: course._id,
-        lessonId,
-      });
-      console.log(data);
-      loadCourse();
+        const { data } = await axios.post(`/api/mark-incomplete`, {
+            courseId: course._id,
+            lessonId,
+        });
+        console.log(data);
+
+        // Update the completedLessons state
+        setCompletedLessons((prevCompletedLessons) =>
+            prevCompletedLessons.filter((id) => id !== lessonId)
+        );
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
   };
-
+  
   return (
     <StudentRoute>
       <div className="row margin-sides-0">
