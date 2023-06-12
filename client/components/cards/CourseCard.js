@@ -21,7 +21,7 @@ const CourseCard = ({ course }) => {
           }
         >
           <h2 className="font-weight-bold">{name}</h2>
-          <p>by {tutor.name}</p>
+          <p>Created by {tutor.name}</p>
           <Badge
             count={university}
             style={{ backgroundColor: "#03a9f4" }}

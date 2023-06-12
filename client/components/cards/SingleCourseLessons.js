@@ -5,11 +5,11 @@ const SingleCourseLessons = ({
   lessons,
   setActiveLesson,
   activeLesson,
-}) => {
+}) => { 
   return (
     <div className="lesson-list">
-      {lessons && <h4>{lessons.length} Lessons</h4>}
-      <hr />
+      {lessons && <h4>{lessons.length} Lessonsa</h4>}
+      <hr /> 
       <List
         itemLayout="horizontal"
         dataSource={lessons}
@@ -22,7 +22,7 @@ const SingleCourseLessons = ({
           >
             <Item.Meta
               avatar={<Checkbox className="custom-checkbox" />}
-              title={`${index + 1}. ${item.title}`}
+              title={`${index + 1}. ${item.title.substring(0, 100)}`}
             />
           </Item>
         )}

@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+const { ObjectId } = Schema;
+
 
 // TODO : schema for user
 const userSchema = new Schema(
@@ -35,6 +37,7 @@ const userSchema = new Schema(
       data: String,
       default: "",
     },
+    courses: [{ type: ObjectId, ref: "Course" }],
   },
   { timestamps: true }
 );

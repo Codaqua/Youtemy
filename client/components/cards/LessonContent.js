@@ -1,8 +1,10 @@
+import ReactMarkdown from "react-markdown";
+
 const LessonContent = ({ lesson }) => {
     return (
         <div>
             <h4>{lesson.title}</h4>
-            <h4>{lesson.content }</h4>
+            <ReactMarkdown>{lesson.content}</ReactMarkdown>
             {lesson.videos && lesson.videos.length > 0 ? (
                 lesson.videos.map((videoId, index) => (
                 <div key={index} className="video-container">

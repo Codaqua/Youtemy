@@ -21,6 +21,11 @@ const lessonSchema = new mongoose.Schema(
     },
     // video_link: [],
     videos: [],
+    // *******
+    completed: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

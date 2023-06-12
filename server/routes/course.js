@@ -3,7 +3,7 @@ import express from "express";
 const router = express.Router();
 
 // middleware
-import { requireSignin, isTutor } from "../middlewares";
+import { requireSignin, isTutor, isEnrolled } from "../middlewares";
 
 // controllers
 import { 
@@ -18,7 +18,13 @@ import {
     updateLesson, 
     publishCourse,
     unpublishCourse,
-    courses
+    courses,
+    checkEnrollment,
+    enrollment,
+    userCourses,
+    markCompleted,
+    markIncomplete,
+    listCompleted,
 } from "../controllers/course";
 
 
@@ -56,10 +62,19 @@ router.put("/course/lesson/:slug/:lessonId", requireSignin, updateLesson);
 router.put("/course/:slug/:lessonId/:videoUrl", requireSignin, removeVideo);
 
 
+router.get("/check-enrollment/:courseId", requireSignin, checkEnrollment);
 
+// enrollment
+router.post("/enrollment/:courseId", requireSignin, enrollment);
 
+router.get("/user-courses", requireSignin, userCourses);
+router.get("/user/course/:slug", requireSignin, isEnrolled, read);
 
+// mark completed
+router.post("/mark-completed", requireSignin, markCompleted);
+router.post("/mark-incomplete", requireSignin, markIncomplete);
+router.post("/list-completed", requireSignin, listCompleted);
 
-
+// router.post("/list-completed", requireSignin, listCompleted);
 
 module.exports = router;

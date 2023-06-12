@@ -1,10 +1,15 @@
 import SingleCourse from "../../pages/course/[slug]";
-import { Badge, Modal } from "antd";
-
+import { Badge, Modal, Button } from "antd";
+import { LoadingOutlined, SafetyOutlined } from "@ant-design/icons";
 
 
 const SingleCourseJumbotron = ({
   course,
+  loading,
+  user,
+  handleEnrollment,
+  enrolled,
+  setEnrolled,
 }) => {
   // destructure
   const { name, tutor, description, university, degree, year, subject, image, lessons, createdAt, updatedAt } = course;
@@ -13,6 +18,35 @@ const SingleCourseJumbotron = ({
     <div className="jumbotron bg-primary square">
       {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
       <div className="row">
+
+        <div className="col-md-4">
+          {/* // TODO : ADD POINTER
+          // className="pointer" */}
+          {/* show image preview */}
+          
+          {/* styles.css */}
+          <div className="image-container">
+            {lessons[0].video && lessons[0].video.Location ? (
+              <img
+                src={image ? image.Location : "/course.png"}
+                alt={name}
+                onClick={() => setPreview(lessons[0].video.Location)}
+              />
+            ) : (
+              <img
+                src={image ? image.Location : "/course.png"}
+                alt={name}
+              />
+            )}
+          </div>
+            {/* enroll button */}
+          <p>
+            Show enroll button
+          </p>
+
+        </div>
+
+
         <div className="col-md-8">
           {/* title */}
           <h1 className="text-light font-weight-bold">{name}</h1>
@@ -59,54 +93,31 @@ const SingleCourseJumbotron = ({
             Last updated: {new Date(updatedAt).toLocaleDateString()}
           </p>
 
-
-        </div>
-
-        <div className="col-md-4">
-        {/* // TODO : ADD POINTER
-          // className="pointer" */}
-          {/* show image preview */}
-          
-          {/* styles.css */}
-          <div className="image-container">
-          {lessons[0].video && lessons[0].video.Location ? (
-            <img
-              src={image ? image.Location : "/course.png"}
-              alt={name}
-              onClick={() => setPreview(lessons[0].video.Location)}
-            />
-          ) : (
-            <img
-              src={image ? image.Location : "/course.png"}
-              alt={name}
-            />
-          )}
-          {/* {lessons[0].video && lessons[0].video.Location ? (
-            // TODO : NO FUNCIONA CAMBIO MEDIDAS
-            <div width={320} height={180} 
-            >
-              <img
-                src={image ? image.Location : "/course.png"}
-                alt={name}
-                className="img img-fluid"
-              />
-            </div>
-          ) : (
-            <div width={320} height={180}>
-              <img
-                src={image ? image.Location : "/course.png"}
-                alt={name}
-                className="img img-fluid"
-              />
-            </div>
-          )} */}
-        </div>
           {/* enroll button */}
-          <p>
-            Show enroll button
-          </p>
+          {loading ? (
+            <div className="d-flex justify-content-center">
+              <LoadingOutlined className="h1 text-danger" />
+            </div>
+          ) : (
+            <Button
+              className="mb-3 mt-3 button-enroll"
+              type="danger"
+              block
+              shape="round"
+              icon={<SafetyOutlined />}
+              size="large"
+              disabled={loading}
+              onClick={handleEnrollment}
+            >
+              {user
+                ? enrolled.status
+                  ? "Go to course"
+                  : "Enroll"
+                : "Login to enroll"}
+            </Button>
+          )}
 
-        </div>
+        </div>       
       </div>
     </div>
   );

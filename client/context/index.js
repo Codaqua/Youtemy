@@ -38,6 +38,7 @@ const Provider = ({ children }) => {
     });
   }, []);
 
+
   // Axios. Interceptors to handling expired toke / cookies
   axios.interceptors.response.use(
     function (response) {
@@ -75,8 +76,10 @@ const Provider = ({ children }) => {
       // console.log("CSRF", data);
       // set axios default headers with csrf token
       // axios.defaults.headers["X-CSRF-Token"] = data.getCsrfToken;
+
       axios.defaults.headers.common["X-CSRF-Token"] = data.csrfToken;
-      
+      // TODO: I change this after including the marked lessons
+      // axios.defaults.headers.common["csrf-token"] = data.csrfToken;
     };
     getCsrfToken();
   }, []);
