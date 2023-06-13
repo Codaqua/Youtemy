@@ -171,6 +171,8 @@
 import React, { useState, useEffect } from 'react';
 import YouTube from 'react-youtube';
 
+const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+
 const LessonContent = ({ lesson }) => {
     const [videoTitles, setVideoTitles] = useState([]);
 
@@ -179,8 +181,10 @@ const LessonContent = ({ lesson }) => {
             const fetchVideoTitles = async () => {
                 try {
                     const videoIds = lesson.videos.join(",");
-                    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoIds}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`);
+                    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoIds}&key=${apiKey}`);
+                    console.log("response fetch: ", response);
                     const data = await response.json();
+                    console.log("data fetch: ", data);
                     const titles = data.items.map(item => item.snippet.title);
                     setVideoTitles(titles);
                 } catch (error) {
@@ -216,22 +220,35 @@ const LessonContent = ({ lesson }) => {
     return (
         <div>
             <h4>{lesson.title}</h4>
+
+            
             {lesson.videos && lesson.videos.length > 0 ? (
                 lesson.videos.map((videoId, index) => (
-                    <div key={index} className="video-container" style={{ marginBottom: '20px' }}>
-                        {videoTitles[index] && <h5>{videoTitles[index]}</h5>}
+                    <React.Fragment key={index}>
+                        <div className="video-title">
+                            {videoTitles[index] && <h5>{videoTitles[index]}</h5>}
+                        </div>
+                        <div key={index} className="video-container" style={{ marginBottom: '3rem' }}>
+                        {/* <div className="video-title">
+                            {videoTitles[index] && <h5>{videoTitles[index]}</h5>}
+                        </div> */}
+                                               
+                        <div className='video-youtube'>
                         <YouTube
                             videoId={videoId}
                             opts={opts}
                             onStateChange={onPlayerStateChange}
                         />
+
+                        </div>
                     </div>
+                    </React.Fragment>
                 ))
             ) : (
                 <p className="no-videos">Sorry!! There is no video available for this lesson :( </p>
             )}
         </div>
-    );
+    );   
 };
 
 export default LessonContent;
