@@ -105,15 +105,80 @@ const SingleCourse = () => {
   //   console.log(data);
   //   setCompletedLessons([...completedLessons, course.lessons[clicked]._id]);
   // };
+
+  ////// initial version THAT WORKED
+  // const markCompleted = async (lessonId) => {
+  //   console.log("Mark as completed => ", lessonId);
+  //   const { data } = await axios.post(`/api/mark-completed`, {
+  //     courseId: course._id,
+  //     lessonId,
+  //   });
+  //   console.log(data);
+  //   loadCourse();
+  // };
+
+  // LAST VERSION THAT WORKED
+  // const markCompleted = async (lessonId) => {
+  //   console.log("Mark as completed => ", lessonId);
+  //   const { data } = await axios.post(`/api/mark-completed`, {
+  //     courseId: course._id,
+  //     lessonId,
+  //   });
+  //   console.log(data);
+  
+  //   // Find the next uncompleted lesson
+  //   let nextUncompletedIndex = -1;
+  //   for (let i = 0; i < course.lessons.length; i++) {
+  //     if (!completedLessons.includes(course.lessons[i]._id) && course.lessons[i]._id !== lessonId) {
+  //       nextUncompletedIndex = i;
+  //       break;
+  //     }
+  //   }
+  
+  //   // Set the next uncompleted lesson as the active lesson
+  //   if (nextUncompletedIndex !== -1) {
+  //     setClicked(nextUncompletedIndex);
+  //     setActiveLesson(course.lessons[nextUncompletedIndex]);
+  //   }
+  
+  //   // Refresh the list of completed lessons
+  //   loadCourse();
+  // };
+
   const markCompleted = async (lessonId) => {
     console.log("Mark as completed => ", lessonId);
-    const { data } = await axios.post(`/api/mark-completed`, {
-      courseId: course._id,
-      lessonId,
-    });
-    console.log(data);
-    loadCourse();
-  };
+    try {
+        const { data } = await axios.post(`/api/mark-completed`, {
+            courseId: course._id,
+            lessonId,
+        });
+        console.log(data);
+
+        // Refresh the list of completed lessons
+        const updatedCompletedLessons = await loadCompletedLessons();
+
+        // Find the next uncompleted lesson
+        let nextUncompletedIndex = -1;
+        for (let i = 0; i < course.lessons.length; i++) {
+            if (!updatedCompletedLessons.includes(course.lessons[i]._id) && course.lessons[i]._id !== lessonId) {
+                nextUncompletedIndex = i;
+                break;
+            }
+        }
+
+        // Set the next uncompleted lesson as the active lesson
+        if (nextUncompletedIndex !== -1) {
+            setClicked(nextUncompletedIndex);
+            setActiveLesson(course.lessons[nextUncompletedIndex]);
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+
+  
   
   // const markIncompleted = async (lessonId) => {
   //   try {
@@ -144,6 +209,8 @@ const SingleCourse = () => {
         console.log(err);
     }
   };
+
+
   
   return (
     <StudentRoute>
@@ -152,7 +219,8 @@ const SingleCourse = () => {
         {/* Column A */}
         <div className="col col-md-39">
           {activeLesson && (
-            <LessonContent lesson={activeLesson} />
+            // <LessonContent lesson={activeLesson} />
+            <LessonContent lesson={activeLesson} markLessonCompleted={() => markCompleted(activeLesson._id)} />
           )}
         </div>
 

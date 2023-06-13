@@ -1,81 +1,3 @@
-// ////////////////////////////////////////////////////////////
-
-// import ReactMarkdown from "react-markdown";
-
-// const LessonContent = ({ lesson }) => {
-//     return (
-//         <div>
-//             <h4>{lesson.title}</h4>
-//             <ReactMarkdown>{lesson.content}</ReactMarkdown>
-//             {lesson.videos && lesson.videos.length > 0 ? (
-//                 lesson.videos.map((videoId, index) => (
-//                 <div key={index} className="video-container">
-//                     <iframe
-//                     width="100%"
-//                     src={`https://www.youtube.com/embed/${videoId}`}
-//                     // frameBorder="0"
-//                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//                     allowFullScreen
-//                     ></iframe>
-//                 </div>
-//                 ))
-//             ) : (
-//                 <p className="no-videos">Sorry!! There is no video available for this lesson :( </p>
-//             )}
-       
-//         </div>
-//     );
-//   };
-  
-//   export default LessonContent;
-
-  /////////////////////////////////////////////////////////////////////////////
-// LAST VERSION THAT WORKED
-//   import React, { useState, useEffect } from "react";
-//   import axios from "axios";
-//   import ReactMarkdown from "react-markdown";
-  
-//   const LessonContent = ({ lesson }) => {
-//     const [videoData, setVideoData] = useState([]);
-  
-//     useEffect(() => {
-//       if (lesson.videos && lesson.videos.length > 0) {
-//         const fetchVideoData = async () => {
-//           const promises = lesson.videos.map((videoId) =>
-//             axios.get(`/api/youtube/${videoId}`)
-//           );
-//           const results = await Promise.all(promises);
-//           const embedHtmls = results.map(
-//             (result) => result.data.items[0].player.embedHtml
-//           );
-//           setVideoData(embedHtmls);
-//         };
-//         fetchVideoData();
-//       }
-//     }, [lesson.videos]);
-  
-//     return (
-//       <div>
-//         <h4>{lesson.title}</h4>
-//         <ReactMarkdown>{lesson.content}</ReactMarkdown>
-//         {lesson.videos && lesson.videos.length > 0 ? (
-//           videoData.map((embedHtml, index) => (
-//             <div
-//               key={index}
-//               className="video-container"
-//               dangerouslySetInnerHTML={{ __html: embedHtml }}
-//             />
-//           ))
-//         ) : (
-//           <p className="no-videos">
-//             Sorry!! There is no video available for this lesson :(
-//           </p>
-//         )}
-//       </div>
-//     );
-//   };
-  
-//   export default LessonContent;
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -173,7 +95,7 @@ import YouTube from 'react-youtube';
 
 const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-const LessonContent = ({ lesson }) => {
+const LessonContent = ({ lesson, markLessonCompleted, setNextLessonAsActive }) => {
     const [videoTitles, setVideoTitles] = useState([]);
 
     useEffect(() => {
@@ -203,13 +125,60 @@ const LessonContent = ({ lesson }) => {
         },
     };
 
-    const onPlayerStateChange = (event) => {
+    // const onPlayerStateChange = (event) => {
+    //     if (event.data === window.YT.PlayerState.PLAYING) {
+    //         const interval = setInterval(() => {
+    //             const currentTime = event.target.getCurrentTime();
+    //             const minutes = Math.floor(currentTime / 60);
+    //             const seconds = Math.floor(currentTime % 60);
+    //             console.log(`Video is at ${minutes}m ${seconds}s`);
+    //         }, 1000);
+    //         event.target.interval = interval;
+    //     } else {
+    //         clearInterval(event.target.interval);
+    //     }
+    // };
+
+    // LAST THAT WORKED
+    // const onPlayerStateChange = (event, videoIndex) => {
+    //     if (event.data === window.YT.PlayerState.PLAYING) {
+    //         const interval = setInterval(() => {
+    //             const currentTime = event.target.getCurrentTime();
+    //             const totalTime = event.target.getDuration();
+    //             const remainingTime = totalTime - currentTime;
+    //             const minutes = Math.floor(currentTime / 60);
+    //             const seconds = Math.floor(currentTime % 60);
+    //             console.log(`Video is at ${minutes}m ${seconds}s`);
+
+    //             // If the video is the last one in the lesson, mark the lesson as completed when the video ends
+    //             if (remainingTime < 1 && videoIndex === lesson.videos.length - 1) {
+    //                 clearInterval(event.target.interval);
+    //                 markLessonCompleted(); // call the markLessonCompleted function passed as a prop
+    //             }
+    //         }, 1000);
+    //         event.target.interval = interval;
+    //     } else {
+    //         clearInterval(event.target.interval);
+    //     }
+    // };
+
+    const onPlayerStateChange = (event, videoIndex) => {
         if (event.data === window.YT.PlayerState.PLAYING) {
             const interval = setInterval(() => {
                 const currentTime = event.target.getCurrentTime();
+                const totalTime = event.target.getDuration();
+                const remainingTime = totalTime - currentTime;
                 const minutes = Math.floor(currentTime / 60);
                 const seconds = Math.floor(currentTime % 60);
                 console.log(`Video is at ${minutes}m ${seconds}s`);
+                console.log(`Remaining time is ${remainingTime}s`);
+
+                if (remainingTime < 60 && videoIndex === lesson.videos.length - 1) {
+                    console.log("Last video is about to end, marking as completed");
+                    clearInterval(event.target.interval);
+                    markLessonCompleted && markLessonCompleted();  
+                    setNextLessonAsActive && setNextLessonAsActive();              
+                }
             }, 1000);
             event.target.interval = interval;
         } else {
@@ -232,15 +201,14 @@ const LessonContent = ({ lesson }) => {
                         {/* <div className="video-title">
                             {videoTitles[index] && <h5>{videoTitles[index]}</h5>}
                         </div> */}
-                                               
-                        <div className='video-youtube'>
+                            
                         <YouTube
                             videoId={videoId}
                             opts={opts}
-                            onStateChange={onPlayerStateChange}
+                            // onStateChange={onPlayerStateChange}
+                            onStateChange={(event) => onPlayerStateChange(event, index)}
                         />
-
-                        </div>
+                        
                     </div>
                     </React.Fragment>
                 ))
