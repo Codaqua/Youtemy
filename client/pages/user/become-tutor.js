@@ -97,6 +97,7 @@ const BecomeTutor = () => {
               <br />
               <h2>Setup payout to publish courses on Youtemy</h2>
               <p className="lead text-warning">
+                {/* TODO : STRIPE */}
                 Youtemy partners with stripe to transfer earnings to your bank
                 account
               </p>
@@ -118,6 +119,7 @@ const BecomeTutor = () => {
               </Button>
 
               <p className="lead">
+                {/* TODO : STRIPE */}
                 You will be redirected to stripe to complete onboarding process.
               </p>
             </div>

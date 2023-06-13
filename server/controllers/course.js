@@ -413,3 +413,24 @@ export const markIncomplete = async (req, res) => {
     console.log(err);
   }
 };
+
+
+const { google } = require("googleapis");
+
+exports.getVideo = async (req, res) => {
+  try {
+    const youtube = google.youtube({
+      version: "v3",
+      auth: process.env.REACT_APP_YOUTUBE_API_KEY,
+    });
+
+    const response = await youtube.videos.list({
+      id: req.params.videoId,
+      part: "player",
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching video details" });
+  }
+};

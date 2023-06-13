@@ -24,6 +24,10 @@ npm i react-image-file-resizer
 
 npm i react-markdown
 
+npm install react-youtube
+
+
+
 # ---------- SERVER ----------
 npm init -y
 
@@ -47,7 +51,7 @@ npm i query-string@7.0.0
 
 npm i slugify
 
-
+npm install googleapis@latest
 
 # ---------- GLOBAL ----------
 #  

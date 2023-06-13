@@ -7,12 +7,6 @@ import LessonContent from "../../../components/cards/LessonContent";
 import ReactMarkdown from "react-markdown";
 import { PlayCircleOutlined, CheckCircleFilled, MinusCircleFilled } from "@ant-design/icons";
 
-// *******************************************************
-// *******************************************************
-// *******************************************************
-// *******************************************************
-// *******************************************************
-
 const { Item } = List;
 
 const SingleCourse = () => {

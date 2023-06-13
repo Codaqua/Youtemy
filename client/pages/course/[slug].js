@@ -20,7 +20,7 @@ const SingleCourse = ({ course }) => {
  // context
  const {
   state: { user },
-} = useContext(Context);
+} = useContext(Context); 
 
 
 useEffect(() => {

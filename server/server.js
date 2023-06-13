@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 const morgan = require("morgan");
 require("dotenv").config();
 
+const youtubeRouter = require("./routes/course");
+
 const csrfProtection = csrf({ cookie: true });
 
 // create express app
@@ -49,3 +51,5 @@ readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+app.use("/api/youtube", youtubeRouter);
