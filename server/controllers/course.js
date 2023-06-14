@@ -470,11 +470,25 @@ export const filterCourses = async (req, res) => {
 };
 
 export const getCourses = async (req, res) => {
+  console.log('Query to find courses 0:'); 
   try {
+    // const filters = req.body;
+    // const courses = await Course.find(filters);
     const filters = req.body;
-    const courses = await Course.find(filters);
+    let query = {};
+
+    for (let key in filters) {
+      if (!filters[key].startsWith('All')) {
+        query[key] = filters[key];
+      }
+    }
+    console.log('Query to find courses:'); 
+    console.log('Query to find courses:', query); 
+
+    const courses = await Course.find(query);
     res.json(courses);
   } catch (err) {
+    console.error('Error in getCourses:', err);
     res.status(500).json({ error: "Failed to fetch courses" });
   }
 };
