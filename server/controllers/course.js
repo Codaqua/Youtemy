@@ -13,7 +13,7 @@ const awsConfig = {
   apiVersion: process.env.AWS_API_VERSION,
 };
 
-const S3 = new AWS.S3(awsConfig);
+const S3 = new AWS.S3(awsConfig); 
 
 export const uploadImage = async (req, res) => {
   // console.log(req.body);
@@ -395,6 +395,8 @@ export const listCompleted = async (req, res) => {
   }
 };
 
+
+
 export const markIncomplete = async (req, res) => {
   try {
     const { courseId, lessonId } = req.body;
@@ -432,5 +434,47 @@ exports.getVideo = async (req, res) => {
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: "Error fetching video details" });
+  }
+};
+
+
+
+export const filterCourses = async (req, res) => {
+  try {
+      const { university, degree, year, subject } = req.query;
+      let filter = {};
+
+      if (university) {
+          filter.university = university;
+      }
+
+      if (degree) {
+          filter.degree = degree;
+      }
+
+      if (year) {
+          filter.year = year;
+      }
+
+      if (subject) {
+          filter.subject = subject;
+      }
+
+      const courses = await Course.find(filter).exec();
+
+      res.json(courses);
+  } catch (err) {
+      console.log(err);
+      res.status(500).send('Server error');
+  }
+};
+
+export const getCourses = async (req, res) => {
+  try {
+    const filters = req.body;
+    const courses = await Course.find(filters);
+    res.json(courses);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch courses" });
   }
 };

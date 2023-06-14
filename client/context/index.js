@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 // initial state
 const intialState = {
   user: null,
+  // *******************
+  filters: {},
 };
 
 // create context
@@ -17,6 +19,9 @@ const rootReducer = (state, action) => {
       return { ...state, user: action.payload };
     case "LOGOUT":
       return { ...state, user: null };
+    // *******************
+    case "UPDATE_FILTERS":
+      return { ...state, filters: action.payload };
     default:
       return state;
   }

@@ -1,18 +1,34 @@
 // import { useState, useEffect } from "react";
 import axios from "axios";
 import CourseCard from "../components/cards/CourseCard";
+// ***************************
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../context";
 
-const Index = ({ courses }) => {
-// const Index = () => {
-  // const [courses, setCourses] = useState([]);
+const Index = () => {
+  const { state } = useContext(Context);
+  const [courses, setCourses] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     const { data } = await axios.get("/api/courses");
-  //     setCourses(data);
-  //   };
-  //   fetchCourses();
-  // }, []);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        // Fetch the CSRF token
+        const { data: csrfData } = await axios.get("/api/csrf-token");
+        const csrfToken = csrfData.csrfToken;
+  
+        // Fetch courses with CSRF token in headers
+        const { data } = await axios.post("/api/courses", state.filters, {
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
+        });
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchCourses();
+  }, [state.filters]);
 
   return (
     <>
@@ -52,13 +68,14 @@ const Index = ({ courses }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const { data } = await axios.get(`${process.env.API}/courses`);
-  return {
-    props: {
-      courses: data,
-    },
-  };
-}
+//  esto estaba descomentado
+// export async function getServerSideProps() {
+//   const { data } = await axios.get(`${process.env.API}/courses`);
+//   return {
+//     props: {
+//       courses: data,
+//     },
+//   };
+// }
 
 export default Index;

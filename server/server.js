@@ -11,6 +11,8 @@ const youtubeRouter = require("./routes/course");
 
 const csrfProtection = csrf({ cookie: true });
 
+const courseRoutes = require("./routes/course");
+
 // create express app
 const app = express();
 
@@ -53,3 +55,5 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 app.use("/api/youtube", youtubeRouter);
+
+app.use(courseRoutes);

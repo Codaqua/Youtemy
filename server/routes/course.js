@@ -2,7 +2,6 @@ import express from "express";
 
 const router = express.Router();
 
-const { getVideo } = require("../controllers/course");
 
 // middleware
 import { requireSignin, isTutor, isEnrolled } from "../middlewares";
@@ -27,6 +26,7 @@ import {
     markCompleted,
     markIncomplete,
     listCompleted,
+    getCourses
 } from "../controllers/course";
 
 
@@ -79,6 +79,9 @@ router.post("/list-completed", requireSignin, listCompleted);
 
 // router.post("/list-completed", requireSignin, listCompleted);
 
-router.get("/:videoId", getVideo);
+// router.get("/:videoId", getVideo);
+
+// filter
+router.post("/courses", getCourses);
 
 module.exports = router;
