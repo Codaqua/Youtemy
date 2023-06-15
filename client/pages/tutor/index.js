@@ -44,7 +44,7 @@ const TutorIndex = () => {
                       <p style={{ color: "red" }}> 
                         {/* TODO: STYLES INLINE */}
                       {/* <p style={{ marginTop: "-10px" }}> */}
-                        {course.lessons.length} Lessons
+                        {course.lessons.length} Lessonsi
                       </p>
 
                       {course.lessons.length < 5 ? (

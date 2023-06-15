@@ -26,7 +26,9 @@ import {
     markCompleted,
     markIncomplete,
     listCompleted,
-    getCourses
+    getCourses,
+    updateCourses,
+    
 } from "../controllers/course";
 
 
@@ -83,5 +85,7 @@ router.post("/list-completed", requireSignin, listCompleted);
 
 // filter
 router.post("/courses", getCourses);
+
+router.put("/user/update-courses", requireSignin, updateCourses);
 
 module.exports = router;

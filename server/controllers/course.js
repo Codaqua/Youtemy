@@ -305,11 +305,11 @@ export const checkEnrollment = async (req, res) => {
 
 export const enrollment = async (req, res) => {
   try {
-    // check if course is free or paid
+    // check if course is already enrolled
     const course = await Course.findById(req.params.courseId).exec();
     // TODO: NO PUSE course.PAID
     // if (course.paid) return;
-    console.log("free course", course);
+    console.log("the course", course);
 
     const result = await User.findByIdAndUpdate(
       req.auth._id,
@@ -492,3 +492,24 @@ export const getCourses = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch courses" });
   }
 };
+
+
+export const updateCourses = async (req, res) => {
+  try {
+    const { courseIds } = req.body;
+
+    // Update the courses array for the user
+    await User.findByIdAndUpdate(
+      req.auth._id,
+      { courses: courseIds },
+      { new: true }
+    ).exec();
+
+    res.json({ message: "Courses updated successfully." });
+  } catch (err) {
+    console.log("Update courses error", err);
+    return res.status(400).send("Failed to update courses.");
+  }
+};
+
+

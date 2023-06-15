@@ -163,7 +163,7 @@ const CourseView = () => {
                   <div className="col-9">
                     <h5 className="mt-2 text-primary">{course.name}</h5>
                     <p style={{ marginTop: "-10px"}}>
-                      {course.lessons && course.lessons.length} Lessons
+                      {course.lessons && course.lessons.length} Lessonsee
                     </p>
                     <p style={{ marginTop: "-15px", fontSize: "10px" }}>
                       {course.category}
@@ -249,7 +249,7 @@ const CourseView = () => {
             <div className="row pb-5">
               <div className="col lesson-list">
                 <h4>
-                  {course && course.lessons && course.lessons.length} Lessons
+                  {course && course.lessons && course.lessons.length} Lessonsse
                 </h4>
                 <List
                   itemLayout="horizontal"

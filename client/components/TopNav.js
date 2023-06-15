@@ -68,16 +68,15 @@ const TopNav = () => {
       <Item
         key="/"
         onClick={(e) => setCurrent(e.key)}
-        icon={<HomeOutlined />}
       >
-        <Link href="/">
-          Home
+      <Link href="/">
+          <img src="/Youtemy_logo.png" alt="Youtemy" width="100%" />
         </Link>
       </Item>
 
    {/* **************************** */}
       <Item key="university-filter">
-        <Filter
+        <Filter className="cursor-pointer"
           filterType="university"
           options={universities}
           onFilterChange={handleFilterChange}

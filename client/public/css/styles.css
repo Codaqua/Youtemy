@@ -211,3 +211,19 @@ iframe {
 .video-container {
   position: relative;
 } */
+
+.cursor-pointer {
+  cursor: pointer;
+  background-color: grey;
+  border: 4px solid blue;
+  /* margin: 1rem;
+  width: 100%; */ 
+}
+
+.ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  /* cursor: text; */
+  /* background-color: red; */
+  background-color: grey;
+  border: 4px solid blue;
+  cursor: pointer !important;
+}

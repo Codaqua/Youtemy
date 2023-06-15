@@ -62,7 +62,7 @@ const UserIndex = () => {
                                         {course.name}
                                     </h5>
                                     <p style={{ marginBottom: "0px" }}>
-                                      {course.lessons.length} lessons
+                                      {course.lessons.length} lessonsu
                                     </p>
                                     <p className="course-author">
                                         Created by {course.tutor.name}
