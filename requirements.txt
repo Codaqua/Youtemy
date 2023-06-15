@@ -26,6 +26,7 @@ npm i react-markdown
 
 npm install react-youtube
 
+npm install react-bootstrap
 
 
 # ---------- SERVER ----------

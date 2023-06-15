@@ -23,23 +23,26 @@ const Filter = ({ filterType, options }) => {
     };
   
     return (
+      <div className="filter-container">
       <Select
         showSearch
         style={{ width: 200 }}
         placeholder={`Select ${filterType}`}
         optionFilterProp="children"
         onChange={handleFilterChange}
+        className="filter-style"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
         {/* <Option value="all">All</Option> */}
         {options.map((option, index) => (
-          <Option key={index} value={option}>
+          <Option key={index} value={option} className="filter-style-2">
             {option}
           </Option>
         ))}
       </Select>
+          </div>
     );
   };
   
