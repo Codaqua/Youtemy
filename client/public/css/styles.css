@@ -259,6 +259,10 @@ iframe {
   flex-shrink: 0;
 }
 
+.ml-auto {
+  margin-left: 0px !important;
+}
+
 .center-block {
   margin-left: auto;
   margin-right: auto;
@@ -304,6 +308,10 @@ iframe {
   }
 }
 
+/* .brand-up {
+  position: relative;
+  z-index: 2;
+} */
 /* Styling the expanded menu */
 .navbar-collapse.show {
   position: absolute;
