@@ -88,12 +88,14 @@ const CourseCreate = () => {
     }
   };
 
+  // ****** Formulario de creación de curso ******
 
   // TODO : PROPS que se pasan a CouserCreateForm
   return (
     <TutorRoute>
       <h1 className="jumbotron text-center square">Create Course</h1>
       <div className="pt-3 pb-3">
+        <h1>FORMULARIO CREACIÓN DE CURSOS</h1>
         <CourseCreateForm
           handleSubmit={handleSubmit}
           handleImage={handleImage}
@@ -109,7 +111,7 @@ const CourseCreate = () => {
       <hr />
       {/* <pre>{JSON.stringify(image, null, 4)}</pre> */}
     </TutorRoute>
-  );
+  ); 
 };
 
 export default CourseCreate;

@@ -353,3 +353,29 @@ iframe {
   text-align: center;
 }
 
+/* content left column */
+.left-column {
+  /* margin-left: 1rem;
+  margin-right: -2rem; */
+  padding-left: 2rem;
+}
+
+
+/* icons */
+.icons {
+  font-size: 1.5rem;
+  color: blue;
+  margin-right: 2px;
+}
+.icon-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Logo */
+.logo {
+  margin-bottom: 2px;
+
+}

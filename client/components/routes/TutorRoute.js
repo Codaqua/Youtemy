@@ -35,16 +35,18 @@ const TutorRoute = ({ children }) => {
         />
       ) : (
         <div className="container-fluid">
+          <h1>esto es aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaa</h1>
           <div className="row">
+            <div className="col-md-10 left-column">{children}</div>
             <div className="col-md-2">
               <TutorNav />
+          <h1>esto es aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaa</h1>
             </div>
-            <div className="col-md-10">{children}</div>
           </div>
         </div>
       )}
     </>
-  );
+  ); 
 };
 
 export default TutorRoute;

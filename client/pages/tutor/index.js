@@ -17,15 +17,18 @@ const TutorIndex = () => {
     setCourses(data);
   };
 
+// ************* Carátula de los cursos del tutor *************
+
   // TODO: PENDIENTE CORREGIR STYLES INLINE IN THIS FILE
   // const myStyle = { marginTop: "-15px", fontSize: "10px" };
   const myStyle = { fontSize: "10px" };
 
   return (
+    
     <TutorRoute>
       <h1 className="jumbotron text-center square">Tutor Dashboard</h1>
       {/* <pre>{JSON.stringify(courses, null, 4)}</pre> */}
-
+ <h2>Courses you have created:</h2>
       {courses &&
         courses.map((course) => (
           <div  key={course._id}>
@@ -36,7 +39,7 @@ const TutorIndex = () => {
                   size={80}
                   src={course.image ? course.image.Location : "/course.png"}
                 />
-
+<h1> caratura de curso</h1>
                 <div className="media-body pl-2">
                   <div className="row">
                     <div className="col">

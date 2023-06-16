@@ -13,6 +13,8 @@ const StudentRoute = ({ children, showNav = true }) => {
     fetchUser();
   }, []);
 
+  // Construye el interior de cada curso *************************
+
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/current-user");

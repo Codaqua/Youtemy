@@ -1,5 +1,6 @@
 import { List, Checkbox } from "antd";
 const { Item } = List;
+import { PlayCircleOutlined } from '@ant-design/icons';
 
 const SingleCourseLessons = ({
   lessons,
@@ -21,7 +22,7 @@ const SingleCourseLessons = ({
             }`}
           >
             <Item.Meta
-              avatar={<Checkbox className="custom-checkbox" />}
+              avatar={<PlayCircleOutlined  className="custom-checkbox" />}
               title={`${index + 1}. ${item.title.substring(0, 100)}`}
             />
           </Item>

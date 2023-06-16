@@ -12,6 +12,12 @@ import {
   UserAddOutlined,
   CarryOutOutlined,
   TeamOutlined,
+  ExperimentOutlined,
+  PlayCircleFilled,
+  GitlabFilled,
+  CrownFilled,
+  ReadFilled,
+  RobotFilled,
 } from "@ant-design/icons";
 import { Context } from "../context";
 import axios from "axios";
@@ -152,100 +158,171 @@ const TopNav = () => {
   ////////////******************** */
 
   return (
-    <Navbar collapseOnSelect expand="xl" bg="light" variant="light" className="d-flex navbar-expand-custom">
-        {/* Left Block */}
-        {/* Logo */}
-        <Navbar.Brand href="/" className="mr-0">
-            <img src="/Youtemy_logo.png" alt="Youtemy" height="35" />
-        </Navbar.Brand>
+    <Navbar
+      collapseOnSelect
+      expand="xl"
+      bg="light"
+      variant="light"
+      className="d-flex navbar-expand-custom"
+    >
+      {/* Left Block */}
+      {/* Logo */}
+      <Navbar.Brand href="/" className="mr-0">
+        <img
+          src="/Youtemy_logo.png"
+          alt="Youtemy"
+          height="35"
+          className="logo"
+        />
+      </Navbar.Brand>
 
-        {/* Hamburger Menu */}
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      {/* Hamburger Menu */}
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-        {/* Navbar content */}
-        <Navbar.Collapse id="responsive-navbar-nav">
-            {/* Center Block */}
-            <Nav className="mx-auto center-block">
-                <Nav.Item>
-                    <Filter
-                        className="nav-link"
-                        filterType="university"
-                        options={universities}
-                        onFilterChange={handleFilterChange}
-                    />
-                </Nav.Item>
-                <Nav.Item>
-                    <Filter
-                        className="nav-link"
-                        filterType="degree"
-                        options={degrees}
-                        onFilterChange={handleFilterChange}
-                    />
-                </Nav.Item>
-                <Nav.Item>
-                    <Filter
-                        className="nav-link"
-                        filterType="year"
-                        options={years}
-                        onFilterChange={handleFilterChange}
-                    />
-                </Nav.Item>
-                <Nav.Item>
-                    <Filter
-                        className="nav-link"
-                        filterType="subject"
-                        options={subjects}
-                        onFilterChange={handleFilterChange}
-                    />
-                </Nav.Item>
-            </Nav>
-            
-            {/* Right Block */}
-            <Nav className="ml-auto">
-                {user && user.role && user.role.includes("Tutor") ? (
+      {/* Navbar content */}
+      <Navbar.Collapse id="responsive-navbar-nav">
+        {/* Center Block */}
+        <Nav className="mx-auto center-block">
+          <Nav.Item>
+            <Filter
+              className="nav-link"
+              filterType="university"
+              options={universities}
+              onFilterChange={handleFilterChange}
+            />
+          </Nav.Item>
+          <Nav.Item>
+            <Filter
+              className="nav-link"
+              filterType="degree"
+              options={degrees}
+              onFilterChange={handleFilterChange}
+            />
+          </Nav.Item>
+          <Nav.Item>
+            <Filter
+              className="nav-link"
+              filterType="year"
+              options={years}
+              onFilterChange={handleFilterChange}
+            />
+          </Nav.Item>
+          <Nav.Item>
+            <Filter
+              className="nav-link"
+              filterType="subject"
+              options={subjects}
+              onFilterChange={handleFilterChange}
+            />
+          </Nav.Item>
+        </Nav>
+
+        {/* Right Block */}
+        <Nav className="ml-auto">
+          {/* {user && user.role && user.role.includes("Tutor") ? (
                     <Nav.Link href="/tutor/course/create">
                         <CarryOutOutlined />
                         Create a Course
                     </Nav.Link>
-                ) : (
-                    <Nav.Link href="/user/become-tutor">
-                        <TeamOutlined />
-                        Become Tutor
-                    </Nav.Link>
-                )}
+                ) : (user && (
+                  <Nav.Link href="/user/become-tutor">
+                      <TeamOutlined />
+                      Become Tutor
+                  </Nav.Link>
+              ))} */}
 
-                {user === null && (
-                    <>
-                        <Nav.Link href="/login">
-                            <LoginOutlined />
-                            Login
-                        </Nav.Link>
-                        <Nav.Link href="/register">
-                            <UserAddOutlined />
-                            Sign up
-                        </Nav.Link>
-                    </>
-                )}
+          {/* *********** */}
+          {user && user.role && user.role.includes("Tutor") ? (
+            <Nav.Link href="/tutor/course/create">
+              <CarryOutOutlined />
+              Create a Course
+            </Nav.Link>
+          ) : (
+            user && (
+              <>
+                {/* <Nav.Link href="/user/become-tutor">
+                    <TeamOutlined />
+                    Become Tutor
+                </Nav.Link> */}
+                <Nav.Link href="/user/">
+                  <ReadFilled className="icons" />
+                  My Learnings
+                </Nav.Link>
+              </>
+            )
+          )}
 
-                {user && user.role && user.role.includes("Tutor") && (
-                    <Nav.Link href="/tutor">
-                        <TeamOutlined />
-                        Tutor
-                    </Nav.Link>
-                )}
+          {user === null && (
+            <>
+              <Nav.Link href="/login">
+                <RobotFilled className="icons" />
+                Login
+              </Nav.Link>
+              <Nav.Link href="/register">
+                <UserAddOutlined className="icons" />
+                Sign up
+              </Nav.Link>
+            </>
+          )}
 
-                {user !== null && (
-                    <NavDropdown title={user.name} id="collasible-nav-dropdown" menuAlign="right">
-                        <NavDropdown.Item href="/user">Dashboard</NavDropdown.Item>
-                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-                    </NavDropdown>
-                )}
-            </Nav>
-        </Navbar.Collapse>
+          {/* {user && user.role && user.role.includes("Tutor") && (
+            <Nav.Link href="/tutor">
+              <CrownFilled className="icons" />
+              Tutor
+            </Nav.Link>
+          )} */}
+
+          {user !== null && (
+            // <NavDropdown title={user.name} id="collasible-nav-dropdown" menuAlign="right">
+            //     <NavDropdown.Item href="/user">Dashboard</NavDropdown.Item>
+            //     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+            // </NavDropdown>
+            // *********************************
+            // <NavDropdown
+            //     title={
+            //         <div className="icon-container">
+            //             <GitlabFilled className="icons" />
+            //             {/* <span style={{ marginLeft: '8px' }}>{user.name}</span> */}
+            //             <span>{user.name}</span>
+            //         </div>
+            //     }
+            //     id="collasible-nav-dropdown"
+            //     menuAlign="right"
+            // >
+            //     <NavDropdown.Item href="/user">Dashboard</NavDropdown.Item>
+            //     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+            // </NavDropdown>
+            <NavDropdown
+              title={
+                <div className="icon-container">
+                  <GitlabFilled className="icons" />
+                  <span>{user.name}</span>
+                </div>
+              }
+              id="collasible-nav-dropdown"
+              menuAlign="right"
+            >
+              <NavDropdown.Item href="/user">Student Dashboard</NavDropdown.Item>
+
+              {user && user.role && user.role.includes("Tutor") && (
+                <>
+                  <NavDropdown.Item href="/tutor">
+                    Tutor Dashboard
+                  </NavDropdown.Item>
+                  {/* <NavDropdown.Item href="/tutor/course/create">
+                    Create a Course
+                  </NavDropdown.Item> */}
+                </>
+              )}
+
+              <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          )}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
-);
+  );
 
-  
   // return (
   //   <div className="d-flex">
   //     {/* Left Block */}

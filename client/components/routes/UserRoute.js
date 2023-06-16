@@ -12,7 +12,7 @@ const UserRoute = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, []); 
 
   const fetchUser = async () => {
     try {
@@ -26,6 +26,9 @@ const UserRoute = ({ children }) => {
     }
   };
 
+    // Construye el interior de User conn 2 columns *************************
+
+
   return (
     <>
       {!ok ? (
@@ -36,11 +39,12 @@ const UserRoute = ({ children }) => {
       ) : (
         <div className="container-fluid">
           <div className="row">
+
             {/* TODO : CREACIÓN COLUMNAS */}
+            <div className="col-md-10 left-column">{children}</div>
             <div className="col-md-2">
               <UserNav />
             </div>
-            <div className="col-md-10">{children}</div>
           </div>
         </div>
       )}

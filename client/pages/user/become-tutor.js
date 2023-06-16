@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../../context";
+import UserRoute from "../../components/routes/UserRoute";
 import { Button } from "antd";
 import axios from "axios";
 import {
@@ -86,8 +87,8 @@ const BecomeTutor = () => {
 
 
   return (
-    <>
-      <h1 className="jumbotron text-center square">Become Tutor</h1>
+    <UserRoute>
+      <h1 className="jumbotron text-center square">Become Tutora</h1>
 
       <div className="container">
         <div className="row">
@@ -126,7 +127,7 @@ const BecomeTutor = () => {
           </div>
         </div>
       </div>
-    </>
+    </UserRoute>
   );
 };
 
