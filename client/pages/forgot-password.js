@@ -32,11 +32,15 @@ const ForgotPassword = () => {
     try {
       const { data } = await axios.post("/api/forgot-password", { email });
       setSuccess(true);
-      toast("Check your email for the secret code");
+      toast("Check your email for the secret code", {
+        autoClose: 500 // 5 seconds
+      });
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      toast(err.response.data);
+      toast(err.response.data, {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
 
@@ -55,10 +59,14 @@ const ForgotPassword = () => {
       setCode("");
       setNewPassword("");
       setLoading(false);
-      toast("Great! Now you can login with your new password");
+      toast("Great! Now you can login with your new password", {
+        autoClose: 500 // 5 seconds
+      });
     } catch (err) {
       setLoading(false);
-      toast(err.response.data);
+      toast(err.response.data, {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
 

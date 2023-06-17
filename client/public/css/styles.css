@@ -377,5 +377,109 @@ iframe {
 /* Logo */
 .logo {
   margin-bottom: 2px;
+}
 
+.minus-buttom-margin {
+  /* margin-bottom: -10px; */
+  margin-top: 30px;
+}
+
+/* Top navbar */
+.navbar {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+
+/* Buttons inside courses */
+.custom-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.green {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.orange {
+  background-color: #ff9800;
+  color: white;
+}
+
+.soft-red {
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+}
+
+.info-edit-buttons{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* modify courses */
+.button-add-lesson{
+  width: 2rem;
+}
+
+.row {
+
+  margin-left: 0px;
+  margin-right: 0px;
+  justify-content: center;
+}
+
+/* TOPNAV A */
+span {
+  margin:0px !important;
+  padding:0px !important;
+}
+
+/* a span{
+  margin-top:0px !important;
+  margin-bottom:-20px !important;
+  padding-top:10px !important;
+  padding-bottom:0px !important;
+  
+} */
+
+/* Custom styles for the dropdown arrow */
+.nav-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown::after {
+  /* You can adjust margin-left to position the arrow */
+  margin-left: 25px !important;
+}
+
+/* Target the a tag inside NavDropdown */
+.nav-dropdown > a {
+  display: flex;
+  align-items: center;
+}
+
+/* Target the ::after pseudo-element of the a tag inside NavDropdown */
+.nav-dropdown > a::after {
+  margin-left: 5px; /* adjust as needed */
+}
+
+/* TopNav sticky menu */
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures that the navbar is displayed on top of other elements */
+  background-color: #fff; /* Set a background color to ensure the content below doesn't show through */
 }

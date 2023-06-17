@@ -52,7 +52,9 @@ const CourseCreate = () => {
       } catch (err) {
         console.log(err);
         setValues({ ...values, loading: false });
-        toast("Image upload failed. Try later.");
+        toast("Image upload failed. Try later.", {
+          autoClose: 500 // 5 seconds
+        });
       }
     });
   };
@@ -69,7 +71,9 @@ const CourseCreate = () => {
     } catch (err) {
       console.log(err);
       setValues({ ...values, loading: false });
-      toast("Image upload failed. Try later.");
+      toast("Image upload failed. Try later.", {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
 
@@ -81,10 +85,14 @@ const CourseCreate = () => {
         ...values,
         image,
       });
-      toast("Great! Now you can start adding lessons");
+      toast("Great! Now you can start adding lessons", {
+        autoClose: 500 // 5 seconds
+      });
       router.push("/tutor");
     } catch (err) {
-      toast(err.response.data);
+      toast(err.response.data, {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
 

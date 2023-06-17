@@ -53,11 +53,15 @@ const handleEnrollment = async (e) => {
       return router.push(`/user/course/${enrolled.course.slug}`);
     setLoading(true);
     const { data } = await axios.post(`/api/enrollment/${course._id}`);
-    toast(data.message);
+    toast(data.message, {
+      autoClose: 500 // 5 seconds
+    });
     setLoading(false);
     router.push(`/user/course/${data.course.slug}`);
   } catch (err) {
-    toast("Enrollment failed. Try again.");
+    toast("Enrollment failed. Try again.", {
+      autoClose: 500 // 5 seconds
+    });
     console.log(err);
     setLoading(false);
   }

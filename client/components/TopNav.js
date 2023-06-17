@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Menu } from "antd";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { universities, degrees, years, subjects } from "../utils/data";
 
 import Link from "next/link";
 // TODO : ICONS
@@ -18,6 +19,7 @@ import {
   CrownFilled,
   ReadFilled,
   RobotFilled,
+  ExperimentFilled,
 } from "@ant-design/icons";
 import { Context } from "../context";
 import axios from "axios";
@@ -26,98 +28,98 @@ import { toast } from "react-toastify";
 
 import Filter from "./filters/Filter";
 
-const universities = [
-  "All Universities",
-  "UOC",
-  "UPM",
-  "UPB",
-  "Oviedo",
-  "UNED",
-];
-const degrees = [
-  "All degrees",
-  "Computer Science",
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "Geology",
-  "Engineering",
-  "Architecture",
-  "Business",
-  "Economics",
-  "Law",
-  "Medicine",
-  "Nursing",
-  "Pharmacy",
-  "Psychology",
-  "Education",
-  "Philosophy",
-  "History",
-  "Geography",
-  "Literature",
-  "Languages",
-  "Arts",
-  "Music",
-  "Sports",
-  "Other",
-];
-const years = [
-  "All years",
-  "1rst",
-  "2nd",
-  "3rd",
-  "4th",
-  "5th",
-  "6th",
-  "Master",
-  "Other",
-];
-const subjects = [
-  "All subjects",
-  "Algebra",
-  "Analysis",
-  "Geometry",
-  "Statistics",
-  "Probability",
-  "Calculus",
-  "Differential Equations",
-  "Numerical Analysis",
-  "Linear Algebra",
-  "Discrete Mathematics",
-  "Logic",
-  "Topology",
-  "Complex Analysis",
-  "Functional Analysis",
-  "Differential Geometry",
-  "Algebraic Geometry",
-  "Combinatorics",
-  "Graph Theory",
-  "Number Theory",
-  "Set Theory",
-  "Mathematical Physics",
-  "Mathematical Chemistry",
-  "Mathematical Biology",
-  "Mathematical Economics",
-  "Mathematical Finance",
-  "Mathematical Psychology",
-  "Mathematical Sociology",
-  "Mathematical Statistics",
-  "Mathematical Optimization",
-  "Operations Research",
-  "Game Theory",
-  "Control Theory",
-  "Information Theory",
-  "Coding Theory",
-  "Cryptography",
-  "Mathematical Logic",
-  "Mathematical Analysis",
-  "Mathematical Modeling",
-  "Mathematical Programming",
-  "Mathematical Software",
-  "Mathematical Education",
-  "Other",
-];
+// const universities = [
+//   "All Universities",
+//   "UOC",
+//   "UPM",
+//   "UPB",
+//   "Oviedo",
+//   "UNED",
+// ];
+// const degrees = [
+//   "All degrees",
+//   "Computer Science",
+//   "Mathematics",
+//   "Physics",
+//   "Chemistry",
+//   "Biology",
+//   "Geology",
+//   "Engineering",
+//   "Architecture",
+//   "Business",
+//   "Economics",
+//   "Law",
+//   "Medicine",
+//   "Nursing",
+//   "Pharmacy",
+//   "Psychology",
+//   "Education",
+//   "Philosophy",
+//   "History",
+//   "Geography",
+//   "Literature",
+//   "Languages",
+//   "Arts",
+//   "Music",
+//   "Sports",
+//   "Other",
+// ];
+// const years = [
+//   "All years",
+//   "1rst",
+//   "2nd",
+//   "3rd",
+//   "4th",
+//   "5th",
+//   "6th",
+//   "Master",
+//   "Other",
+// ];
+// const subjects = [
+//   "All subjects",
+//   "Algebra",
+//   "Analysis",
+//   "Geometry",
+//   "Statistics",
+//   "Probability",
+//   "Calculus",
+//   "Differential Equations",
+//   "Numerical Analysis",
+//   "Linear Algebra",
+//   "Discrete Mathematics",
+//   "Logic",
+//   "Topology",
+//   "Complex Analysis",
+//   "Functional Analysis",
+//   "Differential Geometry",
+//   "Algebraic Geometry",
+//   "Combinatorics",
+//   "Graph Theory",
+//   "Number Theory",
+//   "Set Theory",
+//   "Mathematical Physics",
+//   "Mathematical Chemistry",
+//   "Mathematical Biology",
+//   "Mathematical Economics",
+//   "Mathematical Finance",
+//   "Mathematical Psychology",
+//   "Mathematical Sociology",
+//   "Mathematical Statistics",
+//   "Mathematical Optimization",
+//   "Operations Research",
+//   "Game Theory",
+//   "Control Theory",
+//   "Information Theory",
+//   "Coding Theory",
+//   "Cryptography",
+//   "Mathematical Logic",
+//   "Mathematical Analysis",
+//   "Mathematical Modeling",
+//   "Mathematical Programming",
+//   "Mathematical Software",
+//   "Mathematical Education",
+//   "Other",
+// ];
 
 const { Item, SubMenu, ItemGroup } = Menu;
 
@@ -137,7 +139,9 @@ const TopNav = () => {
     dispatch({ type: "LOGOUT" });
     window.localStorage.removeItem("user");
     const { data } = await axios.get("/api/logout");
-    toast(data.message);
+    toast(data.message, {
+      autoClose: 500 // 5 seconds
+    });
     router.push("/login");
   };
 
@@ -163,7 +167,7 @@ const TopNav = () => {
       expand="xl"
       bg="light"
       variant="light"
-      className="d-flex navbar-expand-custom"
+      className="d-flex navbar-expand-custom sticky-navbar"
     >
       {/* Left Block */}
       {/* Logo */}
@@ -234,7 +238,7 @@ const TopNav = () => {
           {/* *********** */}
           {user && user.role && user.role.includes("Tutor") ? (
             <Nav.Link href="/tutor/course/create">
-              <CarryOutOutlined />
+              <ExperimentFilled className="icons minus-buttom-margin" />
               Create a Course
             </Nav.Link>
           ) : (
@@ -245,7 +249,7 @@ const TopNav = () => {
                     Become Tutor
                 </Nav.Link> */}
                 <Nav.Link href="/user/">
-                  <ReadFilled className="icons" />
+                  <ReadFilled className="icons minus-buttom-margin" />
                   My Learnings
                 </Nav.Link>
               </>
@@ -265,38 +269,13 @@ const TopNav = () => {
             </>
           )}
 
-          {/* {user && user.role && user.role.includes("Tutor") && (
-            <Nav.Link href="/tutor">
-              <CrownFilled className="icons" />
-              Tutor
-            </Nav.Link>
-          )} */}
 
           {user !== null && (
-            // <NavDropdown title={user.name} id="collasible-nav-dropdown" menuAlign="right">
-            //     <NavDropdown.Item href="/user">Dashboard</NavDropdown.Item>
-            //     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-            // </NavDropdown>
-            // *********************************
-            // <NavDropdown
-            //     title={
-            //         <div className="icon-container">
-            //             <GitlabFilled className="icons" />
-            //             {/* <span style={{ marginLeft: '8px' }}>{user.name}</span> */}
-            //             <span>{user.name}</span>
-            //         </div>
-            //     }
-            //     id="collasible-nav-dropdown"
-            //     menuAlign="right"
-            // >
-            //     <NavDropdown.Item href="/user">Dashboard</NavDropdown.Item>
-            //     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-            // </NavDropdown>
-            <NavDropdown
+            <NavDropdown className="nav-dropdown"
               title={
                 <div className="icon-container">
-                  <GitlabFilled className="icons" />
-                  <span>{user.name}</span>
+                  <GitlabFilled className="icons minus-buttom-margin" />
+                  <span className="minus-buttom-margin">{user.name}</span>
                 </div>
               }
               id="collasible-nav-dropdown"

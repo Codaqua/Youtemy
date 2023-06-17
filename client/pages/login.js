@@ -50,7 +50,9 @@ const Login = () => {
       router.push("/");
       // setLoading(false);
     } catch (err) {
-      toast(err.response.data);
+      toast(err.response.data, {
+        autoClose: 500 // 5 seconds
+      });
       setLoading(false);
     }
   };

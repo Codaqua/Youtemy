@@ -70,7 +70,9 @@ const CourseEdit = () => {
       } catch (err) {
         console.log(err);
         setValues({ ...values, loading: false });
-        toast("Image upload failed. Try later.");
+        toast("Image upload failed. Try later.", {
+          autoClose: 500 // 5 seconds
+        });
       }
     });
   };
@@ -87,7 +89,19 @@ const CourseEdit = () => {
     } catch (err) {
       console.log(err);
       setValues({ ...values, loading: false });
-      toast("Image upload failed. Try later.");
+      toast("Image upload failed. Try later.", {
+        autoClose: 500 // 5 seconds
+      });
+    }
+  };
+
+  const handleCancel = () => {
+    // Attempt to go back to the previous page
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      // If no history is present, navigate to the fallback URL
+      router.push('/tutor');
     }
   };
 
@@ -99,11 +113,16 @@ const CourseEdit = () => {
         ...values,
         image,
       });
-      toast("Course updated!");
+      toast("Course updated!", {
+        autoClose: 500 // 5 seconds
+      });
       // TODO: REDIRECT TO TUTOR DASHBOARD
       // router.push("/tutor");
+      handleCancel();
     } catch (err) {
-      toast(err.response.data);
+      toast(err.response.data, {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
 
@@ -129,7 +148,9 @@ const CourseEdit = () => {
       image,
     });
     // console.log("LESSONS REARRANGED RES => ", data);
-    toast("Lessons rearranged successfully");
+    toast("Lessons rearranged successfully", {
+      autoClose: 500 // 5 seconds
+    });
   };
 
   // Delete lesson
@@ -255,11 +276,15 @@ const CourseEdit = () => {
         const index = arr.findIndex((el) => el._id === current._id);
         arr[index] = current;
         setValues({ ...values, lessons: arr });
-        toast("Lesson updated");
+        toast("Lesson updated", {
+          autoClose: 500 // 5 seconds
+        });
         // setCourse(data);
       }
     } catch (err) {
-        toast("Lesson update failed");
+        toast("Lesson update failed", {
+          autoClose: 500 // 5 seconds
+        });
     }
   };
 

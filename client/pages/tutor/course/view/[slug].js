@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import TutorRoute from "../../../../components/routes/TutorRoute";
 import axios from "axios";
 import { Avatar, Tooltip, Button, Modal, List } from "antd";
-import { 
-  EditOutlined, 
-  CheckOutlined, 
+import {
+  EditOutlined,
+  CheckOutlined,
   UploadOutlined,
   QuestionOutlined,
-  CloseOutlined, 
+  CloseOutlined,
+  RightCircleFilled,
 } from "@ant-design/icons";
 import ReactMarkdown from "react-markdown";
 import AddLessonForm from "../../../../components/forms/AddLessonForm";
@@ -29,7 +30,6 @@ const CourseView = () => {
   // const [uploading, setUploading] = useState(false);
   // const [uploadButtonText, setUploadButtonText] = useState("Upload Video");
 
-
   const router = useRouter();
   const { slug } = router.query;
 
@@ -46,37 +46,36 @@ const CourseView = () => {
   const extractVideoId = (url) => {
     const urlObj = new URL(url);
     const hostname = urlObj.hostname;
-    
-    if (hostname === 'youtu.be') {
+
+    if (hostname === "youtu.be") {
       return urlObj.pathname.slice(1);
     }
-  
-    if (hostname === 'www.youtube.com' || hostname === 'youtube.com') {
-      if (urlObj.pathname === '/watch') {
-        return urlObj.searchParams.get('v');
+
+    if (hostname === "www.youtube.com" || hostname === "youtube.com") {
+      if (urlObj.pathname === "/watch") {
+        return urlObj.searchParams.get("v");
       }
-  
-      if (urlObj.pathname.startsWith('/embed/')) {
-        return urlObj.pathname.split('/')[2];
+
+      if (urlObj.pathname.startsWith("/embed/")) {
+        return urlObj.pathname.split("/")[2];
       }
-  
-      if (urlObj.pathname.startsWith('/v/')) {
-        return urlObj.pathname.split('/')[2];
+
+      if (urlObj.pathname.startsWith("/v/")) {
+        return urlObj.pathname.split("/")[2];
       }
     }
-    
+
     return null; // return null if the format is not recognized
   };
-
-
 
   const handleAddLesson = async (e) => {
     try {
       // TODO : ELIMINAR VIDEOS DUPLICADOS
       // const videoIds = values.videos.map(url => extractVideoId(url)); // convert URLs to videoIds
-      const videoIdsSet = new Set(values.videos.map(url => extractVideoId(url))); 
+      const videoIdsSet = new Set(
+        values.videos.map((url) => extractVideoId(url))
+      );
       const videoIds = Array.from(videoIdsSet); // Convert Set back to an array
-
 
       // const { data } = await axios.post(
       //   `/api/course/lesson/${slug}/${course.tutor._id}`,
@@ -93,61 +92,114 @@ const CourseView = () => {
       // TODO : PENDIENTE DE ELIMINAR
       // setUploadButtonText("Upload video");
       setCourse(data);
-      toast("Lesson added");
+      toast("Lesson added", {
+        autoClose: 500 // 5 seconds
+      });
     } catch (err) {
       console.log(err);
-      toast("Lesson add failed");
+      toast("Lesson add failed", {
+        autoClose: 500 // 5 seconds
+      });
     }
   };
-
 
   const handleUrlChange = (e, index) => {
     const updatedUrls = [...values.videos];
     updatedUrls[index] = e.target.value;
     setValues({ ...values, videos: updatedUrls });
   };
-  
+
   const addUrlField = (e) => {
     e.preventDefault();
     setValues({ ...values, videos: [...values.videos, ""] });
   };
 
+  // const handlePublish = async (e, courseId) => {
+  //   try {
+  //     let answer = window.confirm(
+  //       "Once you publish your course, it will be live in Youtemy for students to enroll"
+  //     );
+  //     if (!answer) return;
+  //     const { data } = await axios.put(`/api/course/publish/${courseId}`);
+  //     setCourse(data);
+  //     toast("Congrats! Your course is live");
+  //   } catch (err) {
+  //     toast("Course publish failed. Try again");
+  //   }
+  // };
+
+  // const handleUnpublish = async (e, courseId) => {
+  //   try {
+  //     let answer = window.confirm(
+  //       "Once you unpublish your course, it will no be available for students to enroll"
+  //     );
+  //     if (!answer) return;
+  //     const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
+  //     setCourse(data);
+  //     toast("Your course is unpublished");
+  //   } catch (err) {
+  //     toast("Course unpublish failed. Try again");
+  //   }
+  // };
 
   const handlePublish = async (e, courseId) => {
-    try {
-      let answer = window.confirm(
-        "Once you publish your course, it will be live in Youtemy for students to enroll"
-      );
-      if (!answer) return;
-      const { data } = await axios.put(`/api/course/publish/${courseId}`);
-      setCourse(data);
-      toast("Congrats! Your course is live");
-    } catch (err) {
-      toast("Course publish failed. Try again");
-    }
+    Modal.confirm({
+      title: "Are you sure?",
+      content:
+        "Once you publish your course, it will be live in Youtemy for students to enroll",
+      maskClosable: true,
+      onOk: async () => {
+        try {
+          const { data } = await axios.put(`/api/course/publish/${courseId}`);
+          setCourse(data);
+          toast("Congrats! Your course is live", {
+            autoClose: 500 // 5 seconds
+          });
+        } catch (err) {
+          toast("Course publish failed. Try again", {
+            autoClose: 500 // 5 seconds
+          });
+        }
+      },
+      onCancel() {
+        // add some action on cancel if required
+      },
+    });
   };
 
   const handleUnpublish = async (e, courseId) => {
-    try {
-      let answer = window.confirm(
-        "Once you unpublish your course, it will no be available for students to enroll"
-      );
-      if (!answer) return;
-      const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
-      setCourse(data);
-      toast("Your course is unpublished");
-    } catch (err) {
-      toast("Course unpublish failed. Try again");
-    }
+    Modal.confirm({
+      title: "Are you sure?",
+      content:
+        "Once you unpublish your course, it will not be available for students to enroll",
+      maskClosable: true,
+      onOk: async () => {
+        try {
+          const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
+          setCourse(data);
+          toast("Your course is unpublished", {
+            autoClose: 500 // 5 seconds
+          });
+        } catch (err) {
+          toast("Course unpublish failed. Try again", {
+            autoClose: 500 // 5 seconds
+          });
+        }
+      },
+      onCancel() {
+        // add some action on cancel if required
+      },
+    });
   };
 
-
-  {/* TODO : PENDIENTE LOS STYLES INLINE */}
+  {
+    /* TODO : PENDIENTE LOS STYLES INLINE */
+  }
   return (
     <TutorRoute>
       <div className="container-fluid pt-3">
         {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
-       {course && (
+        {course && (
           <div className="container-fluid pt-1">
             <div className="media pt-2">
               <Avatar
@@ -162,7 +214,7 @@ const CourseView = () => {
                   {/* <div className="col-9"> */}
                   <div className="col-9">
                     <h5 className="mt-2 text-primary">{course.name}</h5>
-                    <p style={{ marginTop: "-10px"}}>
+                    <p style={{ marginTop: "-10px" }}>
                       {course.lessons && course.lessons.length} Lessonsee
                     </p>
                     <p style={{ marginTop: "-15px", fontSize: "10px" }}>
@@ -170,31 +222,45 @@ const CourseView = () => {
                     </p>
                   </div>
 
-                  <div className="d-flex pt-4">
+                  <div className="d-flex pt-4 info-edit-buttons">
                     <Tooltip title="Edit">
-                      <EditOutlined
-                        onClick={() => router.push(`/tutor/course/edit/${slug}`)}
-                        className="h5 pointer text-warning mr-4"
-                      />
+                      <button
+                        className="custom-button green"
+                        onClick={() =>
+                          router.push(`/tutor/course/edit/${slug}`)
+                        }
+                      >
+                        <EditOutlined className="icon" />
+                        <span>Edit the course</span>
+                      </button>
                     </Tooltip>
 
                     {course.lessons && course.lessons.length < 5 ? (
                       <Tooltip title="Min 5 lessons required to publish">
-                        <QuestionOutlined className="h5 pointer text-danger" />
+                        <div className="custom-button orange">
+                          <QuestionOutlined className="icon" />
+                          <span>Min 5 lessons required to publish</span>
+                        </div>
                       </Tooltip>
                     ) : course.published ? (
                       <Tooltip title="Unpublish">
-                        <CloseOutlined
+                        <button
+                          className="custom-button soft-red"
                           onClick={(e) => handleUnpublish(e, course._id)}
-                          className="h5 pointer text-danger"
-                        />
+                        >
+                          <CloseOutlined className="icon" />
+                          <span>Unpublish the course</span>
+                        </button>
                       </Tooltip>
                     ) : (
                       <Tooltip title="Publish">
-                        <CheckOutlined
+                        <button
+                          className="custom-button orange"
                           onClick={(e) => handlePublish(e, course._id)}
-                          className="h5 pointer text-success"
-                        />
+                        >
+                          <CheckOutlined className="icon" />
+                          <span>Published the course</span>
+                        </button>
                       </Tooltip>
                     )}
                   </div>
@@ -206,15 +272,15 @@ const CourseView = () => {
             + añadir una línea informativa con 3 Markdown básicos */}
             <div className="row">
               <div className="col">
-               <ReactMarkdown children={course.description} />
+                <ReactMarkdown children={course.description} />
               </div>
             </div>
 
-          <div className="row">
-            {/* TODO : PENDIENTE STYLES */}
+            <div className="row">
+              {/* TODO : PENDIENTE STYLES */}
               <Button
                 onClick={() => setVisible(true)}
-                className="col-md-6 offset-md-3 text-center"
+                className="col-md-3  text-center d-flex justify-content-center"
                 type="primary"
                 shape="round"
                 icon={<UploadOutlined />}
@@ -257,15 +323,28 @@ const CourseView = () => {
                   renderItem={(item, index) => (
                     <Item>
                       <Item.Meta
-                        avatar={<Avatar>{index + 1}</Avatar>}
+                        avatar={
+                          <div
+                            style={{
+                              background: "lightgray",
+                              borderRadius: "50%",
+                              width: "32px",
+                              height: "32px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <RightCircleFilled style={{ fontSize: "20px" }} />
+                          </div>
+                        }
                         title={`${index + 1}. ${item.title}`}
-                      ></Item.Meta>
+                      />
                     </Item>
                   )}
                 ></List>
               </div>
             </div>
-
           </div>
         )}
       </div>

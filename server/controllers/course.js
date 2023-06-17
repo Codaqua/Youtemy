@@ -327,7 +327,7 @@ export const enrollment = async (req, res) => {
     console.log("Enrollment err", err);
     return res.status(400).send("Enrollment create failed");
   }
-};
+}; 
 
 
 export const userCourses = async (req, res) => {
@@ -475,14 +475,14 @@ export const getCourses = async (req, res) => {
     // const filters = req.body;
     // const courses = await Course.find(filters);
     const filters = req.body;
-    let query = {};
+    let query = {published: true};
 
     for (let key in filters) {
       if (!filters[key].startsWith('All')) {
         query[key] = filters[key];
       }
     }
-    console.log('Query to find courses:'); 
+ 
     console.log('Query to find courses:', query); 
 
     const courses = await Course.find(query);
