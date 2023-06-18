@@ -6,6 +6,7 @@ import { Avatar, Badge } from "antd";
 import Link from "next/link";
 import { SyncOutlined } from "@ant-design/icons";
 import course from "../../../server/models/course";
+import CourseCard from "../../components/cards/CourseCard";
 
 const UserIndex = () => {
   const {
@@ -15,7 +16,7 @@ const UserIndex = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { 
     loadCourses();
   }, []);
 
@@ -42,62 +43,15 @@ const UserIndex = () => {
         <h1 className="jumbotron text-center square">My Learning</h1>
 
         {/* Show list of courses */}
-        <div className="d-flex flex-wrap course-card-container">
-            {courses &&
-                courses.map((course) => (
-                    <div key={course._id} className="course-card">
-                        <Link href={`/user/course/${course.slug}`}>
-                                <img
-                                    className="course-image"
-                                    src={
-                                        course.image
-                                            ? course.image.Location
-                                            : "/course.png"
-                                    }
-                                    alt="course"
-                                />
-
-                                <div className="course-content">
-                                    <h5 className="course-title">
-                                        {course.name}
-                                    </h5>
-                                    <p style={{ marginBottom: "0px" }}>
-                                      {course.lessons.length} lessonsu
-                                    </p>
-                                    <p className="course-author">
-                                        Created by {course.tutor.name}
-                                    </p>
-                                    <div className="course-details">
-                                        
-                                    <Badge
-                                        count={course.university}
-                                        style={{ backgroundColor: "#03a9f4" }}
-                                        className="pb-2 mr-2"
-                                    />
-                                    <Badge
-                                        count={course.degree}
-                                        style={{ backgroundColor: "#03a9f4" }}
-                                        className="pb-2 mr-2"
-                                    />
-                                    <Badge
-                                        count={course.year}
-                                        style={{ backgroundColor: "#03a9f4" }}
-                                        className="pb-2 mr-2"
-                                    />
-                                    <Badge
-                                        count={course.subject}
-                                        style={{ backgroundColor: "#03a9f4" }}
-                                        className="pb-2 mr-2"
-                                    />
-
-                                    </div>
-                                </div>
-                        </Link>
-                    </div>
+        <div className="container-fluid my-container-centered">
+            <div className="block-content">
+                {courses && courses.map((course) => (
+                    <CourseCard key={course._id} course={course} isLoggedIn={true} />
                 ))}
+            </div>
         </div>
     </UserRoute>
-);
+  );
 };
 
 export default UserIndex;

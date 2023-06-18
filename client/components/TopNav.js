@@ -28,99 +28,6 @@ import { toast } from "react-toastify";
 
 import Filter from "./filters/Filter";
 
-// const universities = [
-//   "All Universities",
-//   "UOC",
-//   "UPM",
-//   "UPB",
-//   "Oviedo",
-//   "UNED",
-// ];
-// const degrees = [
-//   "All degrees",
-//   "Computer Science",
-//   "Mathematics",
-//   "Physics",
-//   "Chemistry",
-//   "Biology",
-//   "Geology",
-//   "Engineering",
-//   "Architecture",
-//   "Business",
-//   "Economics",
-//   "Law",
-//   "Medicine",
-//   "Nursing",
-//   "Pharmacy",
-//   "Psychology",
-//   "Education",
-//   "Philosophy",
-//   "History",
-//   "Geography",
-//   "Literature",
-//   "Languages",
-//   "Arts",
-//   "Music",
-//   "Sports",
-//   "Other",
-// ];
-// const years = [
-//   "All years",
-//   "1rst",
-//   "2nd",
-//   "3rd",
-//   "4th",
-//   "5th",
-//   "6th",
-//   "Master",
-//   "Other",
-// ];
-// const subjects = [
-//   "All subjects",
-//   "Algebra",
-//   "Analysis",
-//   "Geometry",
-//   "Statistics",
-//   "Probability",
-//   "Calculus",
-//   "Differential Equations",
-//   "Numerical Analysis",
-//   "Linear Algebra",
-//   "Discrete Mathematics",
-//   "Logic",
-//   "Topology",
-//   "Complex Analysis",
-//   "Functional Analysis",
-//   "Differential Geometry",
-//   "Algebraic Geometry",
-//   "Combinatorics",
-//   "Graph Theory",
-//   "Number Theory",
-//   "Set Theory",
-//   "Mathematical Physics",
-//   "Mathematical Chemistry",
-//   "Mathematical Biology",
-//   "Mathematical Economics",
-//   "Mathematical Finance",
-//   "Mathematical Psychology",
-//   "Mathematical Sociology",
-//   "Mathematical Statistics",
-//   "Mathematical Optimization",
-//   "Operations Research",
-//   "Game Theory",
-//   "Control Theory",
-//   "Information Theory",
-//   "Coding Theory",
-//   "Cryptography",
-//   "Mathematical Logic",
-//   "Mathematical Analysis",
-//   "Mathematical Modeling",
-//   "Mathematical Programming",
-//   "Mathematical Software",
-//   "Mathematical Education",
-//   "Other",
-// ];
-
 const { Item, SubMenu, ItemGroup } = Menu;
 
 const TopNav = () => {
@@ -142,7 +49,7 @@ const TopNav = () => {
     toast(data.message, {
       autoClose: 500 // 5 seconds
     });
-    router.push("/login");
+    router.push("/");
   };
 
   ////////////******************** */
@@ -250,7 +157,7 @@ const TopNav = () => {
                 </Nav.Link> */}
                 <Nav.Link href="/user/">
                   <ReadFilled className="icons minus-buttom-margin" />
-                  My Learnings
+                  My Learning
                 </Nav.Link>
               </>
             )

@@ -371,18 +371,6 @@ export const markCompleted = async (req, res) => {
 };
 
 
-// export const listCompleted = async (req, res) => {
-//   const { courseId } = req.body;
-  
-//   // Fetch all completed lessons for a course
-//   const completedLessons = await Completed.findOne({
-//     user: req.auth._id,
-//     course: courseId,
-//   }).select('lessons').exec();
-
-//   res.json(completedLessons ? completedLessons.lessons : []);
-// };
-
 export const listCompleted = async (req, res) => {
   try {
     const list = await Completed.findOne({
@@ -394,7 +382,6 @@ export const listCompleted = async (req, res) => {
     console.log(err);
   }
 };
-
 
 
 export const markIncomplete = async (req, res) => {
@@ -485,8 +472,13 @@ export const getCourses = async (req, res) => {
  
     console.log('Query to find courses:', query); 
 
-    const courses = await Course.find(query);
-    res.json(courses);
+    // const courses = await Course.find(query);
+    // res.json(courses);
+    const courses = await Course.find(query)
+    .populate("tutor", "_id name")
+    .exec();
+
+  res.json(courses);
   } catch (err) {
     console.error('Error in getCourses:', err);
     res.status(500).json({ error: "Failed to fetch courses" });

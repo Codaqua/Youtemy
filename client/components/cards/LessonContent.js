@@ -5,13 +5,14 @@ import YouTube from 'react-youtube';
 
 const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-const LessonContent = ({ lesson, markLessonCompleted, setNextLessonAsActive }) => {
+const LessonContent = ({ lesson, courseName, markLessonCompleted, setNextLessonAsActive }) => {
     const [videoTitles, setVideoTitles] = useState([]);
 
     useEffect(() => {
         if (lesson.videos && lesson.videos.length > 0) {
             const fetchVideoTitles = async () => {
                 try {
+                    console.log("This is lesson: ", lesson);
                     const videoIds = lesson.videos.join(",");
                     const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoIds}&key=${apiKey}`);
                     console.log("response fetch: ", response);
@@ -61,9 +62,13 @@ const LessonContent = ({ lesson, markLessonCompleted, setNextLessonAsActive }) =
  
     return (
         <div>
+            <center>
+            <h3 className="jumbotron text-center bg-primary square">{courseName}</h3> {/* Using courseName prop */}
+            </center>
             <h4>{lesson.title}</h4>
 
             {/* <pre>{JSON.stringify(lesson, null, 4)}</pre> */}
+
             <div className="video-content">
                 {/* here the lesson.content using the markdown */}
                 {lesson.content && <ReactMarkdown>{lesson.content}</ReactMarkdown>}

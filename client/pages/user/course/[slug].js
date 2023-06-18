@@ -124,23 +124,6 @@ const SingleCourse = () => {
     }
   };
 
-// ********************
-  // const removeCourse = () => {
-  //   confirm({
-  //     title: "Do you want to remove this course?",
-  //     content: "This action cannot be undone.",
-  //     onOk: async () => {
-  //       try {
-  //         console.log("COURSE DELETED", course._id);
-  //         await axios.put(`/api/user/course/${course._id}`);
-  //         return router.push("/user");
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     },
-  //     onCancel() {},
-  //   });
-  // };
   const removeCourse = async () => {
     confirm({
       title: "Do you want to remove this course?",
@@ -174,12 +157,12 @@ const SingleCourse = () => {
   return (
     <StudentRoute>
       <div className="row margin-sides-0">
-
+      {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
         {/* Column A */}
         <div className="col col-md-39">
           {activeLesson && (
             // <LessonContent lesson={activeLesson} />
-            <LessonContent lesson={activeLesson} markLessonCompleted={() => markCompleted(activeLesson._id)} />
+            <LessonContent lesson={activeLesson} courseName={course.name} markLessonCompleted={() => markCompleted(activeLesson._id)} />
           )}
         </div>
 
