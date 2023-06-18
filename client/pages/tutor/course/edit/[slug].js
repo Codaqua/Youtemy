@@ -63,7 +63,7 @@ const CourseEdit = () => {
         let { data } = await axios.post("/api/course/upload-image", {
           image: uri,
         });
-        console.log("IMAGE UPLOADED", data);
+        // console.log("IMAGE UPLOADED", data);
         // set image in the state
         setImage(data);
         setValues({ ...values, loading: false });
@@ -165,7 +165,7 @@ const CourseEdit = () => {
     setValues({ ...values, lessons: allLessons });
     // send request to server
     const { data } = await axios.put(`/api/course/${slug}/${removed[0]._id}`);
-    console.log("LESSON DELETED =>", data);
+    // console.log("LESSON DELETED =>", data);
   };
 
   /**
@@ -211,13 +211,13 @@ const CourseEdit = () => {
     const videoUrl = current.videos[index];
     try {
       // const response = await axios.put(`/api/course/${slug}/${current._id}/${current.videos[index]}`);
-      console.log("handleRemoveVideo try");
-      console.log("slug",`${slug}`);
-      console.log("current._id", `${current._id}`);
-      console.log("videoUrl", `${videoUrl}`);
+      // console.log("handleRemoveVideo try");
+      // console.log("slug",`${slug}`);
+      // console.log("current._id", `${current._id}`);
+      // console.log("videoUrl", `${videoUrl}`);
       
       const response = await axios.put(`/api/course/${slug}/${current._id}/${videoUrl}`);
-      console.log('Video removed', response);
+      // console.log('Video removed', response);
       setCurrent({ ...current, videos: current.videos.filter((v, i) => i !== index) });
     } catch (error) {
       console.log("handleRemoveVideo try");

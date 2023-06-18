@@ -92,7 +92,7 @@ export const currentUser = async (req, res) => {
     // TODO : PENdiente verificar si es req.user o req.auth --> version express-jwt in middleware/index.js
     // const user = await User.findById(req.user._id).select("-password").exec();
     const user = await User.findById(req.auth._id).select("-password").exec();
-    console.log("CURRENT_USER", user);
+    // console.log("CURRENT_USER", user);
     return res.json({ ok: true });
   } catch (err) {
     console.log(err);
@@ -140,7 +140,7 @@ export const forgotPassword = async (req, res) => {
     const emailSent = SES.sendEmail(params).promise();
     emailSent
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json({ ok: true });
       })
       .catch((err) => {

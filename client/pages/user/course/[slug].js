@@ -59,7 +59,7 @@ const SingleCourse = () => {
         const { data } = await axios.post(`/api/list-completed`, {
             courseId: course._id,
         });
-        console.log("COMPLETED LESSONS => ", data);
+        // console.log("COMPLETED LESSONS => ", data);
         setCompletedLessons(data);
 
         // Find the first lesson that is not completed
@@ -76,13 +76,13 @@ const SingleCourse = () => {
   };
 
   const markCompleted = async (lessonId) => {
-    console.log("Mark as completed => ", lessonId);
+    // console.log("Mark as completed => ", lessonId);
     try {
         const { data } = await axios.post(`/api/mark-completed`, {
             courseId: course._id,
             lessonId,
         });
-        console.log(data);
+        // console.log(data);
 
         // Refresh the list of completed lessons
         const updatedCompletedLessons = await loadCompletedLessons();
@@ -113,7 +113,7 @@ const SingleCourse = () => {
             courseId: course._id,
             lessonId,
         });
-        console.log(data);
+        // console.log(data);
 
         // Update the completedLessons state
         setCompletedLessons((prevCompletedLessons) =>

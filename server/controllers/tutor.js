@@ -15,7 +15,7 @@ export const makeTutor = async (req, res) => {
   try {
         // 1. find user from db
     const user = await User.findById(req.auth._id).exec();
-    console.log("This is the Tutor USER => ", user);
+    // console.log("This is the Tutor USER => ", user);
 
     // 2. if user dont have in database field "role" the value "Tutor" then add it
     if(!user.role.includes("Tutor")) {
@@ -53,7 +53,7 @@ export const makeTutor = async (req, res) => {
     const emailSent = SES.sendEmail(params).promise();
     emailSent
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -92,7 +92,7 @@ export const makeTutor = async (req, res) => {
     const emailToManagerSent = SES.sendEmail(managerParams).promise();
     emailToManagerSent
       .then((data) => {
-        console.log('Email sent to backend manager', data);
+        // console.log('Email sent to backend manager', data);
       })
       .catch((err) => {
         console.log('Email failed', err);

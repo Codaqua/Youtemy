@@ -4,7 +4,7 @@ import Link from "next/link";
 const { Meta } = Card;
 
 const CourseCard = ({ course, isLoggedIn }) => {
-  console.log("this is course:", course);
+  // console.log("this is course:", course);
   const {
     name,
     tutor,

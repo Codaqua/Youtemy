@@ -15,7 +15,7 @@ const Filter = ({ filterType, options }) => {
     } else {
       updatedFilters[filterType] = value;
     }
-    console.log('Updated Filters:', updatedFilters); 
+    // console.log('Updated Filters:', updatedFilters); 
       dispatch({
         type: "UPDATE_FILTERS",
         payload: { ...state.filters, [filterType]: value },

@@ -45,7 +45,7 @@ export const uploadImage = async (req, res) => {
         console.log(err);
         return res.sendStatus(400);
       }
-      console.log(data);
+      // console.log(data);
       res.send(data);
     });
   } catch (err) {
@@ -190,7 +190,7 @@ export const removeVideo = async (req, res) => {
       { new: true }
     ).exec();
   
-    console.log('updatedCourse:', updatedCourse);
+    // console.log('updatedCourse:', updatedCourse);
   
     res.json(updatedCourse);
   } catch (err) {
@@ -227,7 +227,7 @@ export const updateLesson = async (req, res) => {
       },
       { new: true }
     ).exec();
-    console.log("updated => ", updated);
+    // console.log("updated => ", updated);
     res.json({ ok: true });
   } catch (err) {
     console.log(err);
@@ -309,7 +309,7 @@ export const enrollment = async (req, res) => {
     const course = await Course.findById(req.params.courseId).exec();
     // TODO: NO PUSE course.PAID
     // if (course.paid) return;
-    console.log("the course", course);
+    // console.log("the course", course);
 
     const result = await User.findByIdAndUpdate(
       req.auth._id,
@@ -318,7 +318,7 @@ export const enrollment = async (req, res) => {
       },
       { new: true }
     ).exec();
-    console.log(result);
+    // console.log(result);
     res.json({
       message: "Congratulations! You have successfully enrolled in this course.",
       course,
@@ -457,7 +457,7 @@ export const filterCourses = async (req, res) => {
 };
 
 export const getCourses = async (req, res) => {
-  console.log('Query to find courses 0:'); 
+  // console.log('Query to find courses 0:'); 
   try {
     // const filters = req.body;
     // const courses = await Course.find(filters);
@@ -470,7 +470,7 @@ export const getCourses = async (req, res) => {
       }
     }
  
-    console.log('Query to find courses:', query); 
+    // console.log('Query to find courses:', query); 
 
     // const courses = await Course.find(query);
     // res.json(courses);

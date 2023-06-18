@@ -17,7 +17,7 @@ const TutorRoute = ({ children }) => {
   const fetchTutor = async () => {
     try {
       const { data } = await axios.get("/api/current-tutor");
-      console.log("TUTOR ROUTE => ", data);
+      // console.log("TUTOR ROUTE => ", data);
       if (data.ok) setOk(true);
     } catch (err) {
       console.log(err);

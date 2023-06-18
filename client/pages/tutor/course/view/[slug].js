@@ -10,6 +10,7 @@ import {
   QuestionOutlined,
   CloseOutlined,
   RightCircleFilled,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
 import ReactMarkdown from "react-markdown";
 import AddLessonForm from "../../../../components/forms/AddLessonForm";
@@ -203,11 +204,11 @@ const CourseView = () => {
                       </button>
                     </Tooltip>
 
-                    {course.lessons && course.lessons.length < 5 ? (
-                      <Tooltip title="Min 5 lessons required to publish">
+                    {course.lessons && course.lessons.length < 1 ? (
+                      <Tooltip title="Min 2 lessons required to publish">
                         <div className="custom-button orange">
-                          <QuestionOutlined className="icon" />
-                          <span>Min 5 lessons required to publish</span>
+                        <ExclamationCircleOutlined className="icon" />
+                          <span>&nbsp; Min 2 lessons required to publish</span>
                         </div>
                       </Tooltip>
                     ) : course.published ? (

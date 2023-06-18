@@ -8,7 +8,7 @@ import { Context } from "../context";
 const Index = () => {
   const { state } = useContext(Context);
   const [courses, setCourses] = useState([]);
-  console.log("This is the content of State to modify:", state);
+  // console.log("This is the content of State to modify:", state);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -67,9 +67,10 @@ const Index = () => {
                 Here’s how to kick things off: Use the four rad filters at the
                 top. <strong>Just tell Youtemy what you're studying</strong>,
                 and BAM! - it's like magic, the videos you need will be right in
-                front of you. 🔮 So, what are you waiting for? <strong>Dive in and let
-                the learning extravaganza begin!</strong> 🎓
+                front of you. 🔮 So, what are you waiting for? 
               </p>
+              <p><strong>Sign up for free on Youtemy to enjoy all its benefits and let
+                the learning extravaganza begin!</strong> 🎓</p>
             </section>
           </div>
         </div>

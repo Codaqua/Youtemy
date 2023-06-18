@@ -12,12 +12,12 @@ const LessonContent = ({ lesson, courseName, markLessonCompleted, setNextLessonA
         if (lesson.videos && lesson.videos.length > 0) {
             const fetchVideoTitles = async () => {
                 try {
-                    console.log("This is lesson: ", lesson);
+                    // console.log("This is lesson: ", lesson);
                     const videoIds = lesson.videos.join(",");
                     const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoIds}&key=${apiKey}`);
-                    console.log("response fetch: ", response);
+                    // console.log("response fetch: ", response);
                     const data = await response.json();
-                    console.log("data fetch: ", data);
+                    // console.log("data fetch: ", data);
                     const titles = data.items.map(item => item.snippet.title);
                     setVideoTitles(titles);
                 } catch (error) {
@@ -44,11 +44,11 @@ const LessonContent = ({ lesson, courseName, markLessonCompleted, setNextLessonA
                 const remainingTime = totalTime - currentTime;
                 const minutes = Math.floor(currentTime / 60);
                 const seconds = Math.floor(currentTime % 60);
-                console.log(`Video is at ${minutes}m ${seconds}s`);
-                console.log(`Remaining time is ${remainingTime}s`);
+                // console.log(`Video is at ${minutes}m ${seconds}s`);
+                // console.log(`Remaining time is ${remainingTime}s`);
 
                 if (remainingTime < 60 && videoIndex === lesson.videos.length - 1) {
-                    console.log("Last video is about to end, marking as completed");
+                    // console.log("Last video is about to end, marking as completed");
                     clearInterval(event.target.interval);
                     markLessonCompleted && markLessonCompleted();  
                     setNextLessonAsActive && setNextLessonAsActive();              
