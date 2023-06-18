@@ -215,7 +215,7 @@ const CourseView = () => {
                   <div className="col-9">
                     <h5 className="mt-2 text-primary">{course.name}</h5>
                     <p style={{ marginTop: "-10px" }}>
-                      {course.lessons && course.lessons.length} Lessonsee
+                      {course.lessons && course.lessons.length} Lessons
                     </p>
                     <p style={{ marginTop: "-15px", fontSize: "10px" }}>
                       {course.category}
@@ -231,7 +231,7 @@ const CourseView = () => {
                         }
                       >
                         <EditOutlined className="icon" />
-                        <span>Edit the course</span>
+                        <span>&nbsp; Edit the course</span>
                       </button>
                     </Tooltip>
 
@@ -259,7 +259,7 @@ const CourseView = () => {
                           onClick={(e) => handlePublish(e, course._id)}
                         >
                           <CheckOutlined className="icon" />
-                          <span>Published the course</span>
+                          <span>&nbsp; Published the course</span>
                         </button>
                       </Tooltip>
                     )}
@@ -286,14 +286,14 @@ const CourseView = () => {
                 icon={<UploadOutlined />}
                 size="large"
               >
-                Add Lesson
+                  &nbsp; Add Lessons
               </Button>
             </div>
 
             <br />
 
             <Modal
-              title="+ Add Lesson"
+              title="+ Add a Lesson"
               centered
               // visible={visible}
               open={visible}
@@ -315,7 +315,7 @@ const CourseView = () => {
             <div className="row pb-5">
               <div className="col lesson-list">
                 <h4>
-                  {course && course.lessons && course.lessons.length} Lessonsse
+                  {course && course.lessons && course.lessons.length} Lessons
                 </h4>
                 <List
                   itemLayout="horizontal"

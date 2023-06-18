@@ -37,7 +37,7 @@ const CourseCard = ({ course, isLoggedIn }) => {
   {name.length > 30 ? `${name.substring(0, 30)}...` : name}
 </h2>
           <p style={{ marginBottom: "0px" }}>{lessons.length} lessons</p>
-          <p>Created by {tutor && tutor.name}</p>
+          <p className="margin-bottom">Created by {tutor && tutor.name}</p>
           <div className="badges">
           <Badge
             count={university}

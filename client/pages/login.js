@@ -18,7 +18,7 @@ const Login = () => {
   } = useContext(Context);
   // const { user } = state;
 
-  // TODO , comment this line
+  // TODO 
   // console.log("STATE", state);
 
   // router
@@ -37,7 +37,7 @@ const Login = () => {
         email,
         password,
       });
-      // TODO , comment this line
+      // TODO , 
       // console.log("LOGIN RESPONSE", data);
       dispatch({
         type: "LOGIN",

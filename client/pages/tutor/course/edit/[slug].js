@@ -317,7 +317,7 @@ const CourseEdit = () => {
 
       <div className="row pb-5">
         <div className="col lesson-list">
-          <h4>{values && values.lessons && values.lessons.length} Lessonssa</h4>
+          <h4>{values && values.lessons && values.lessons.length} Lessons</h4>
           <List
             onDragOver={(e) => e.preventDefault()}
             itemLayout="horizontal"

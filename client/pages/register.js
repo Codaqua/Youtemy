@@ -1,13 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-// TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
 import { useRouter } from "next/router";
-// remove next import - ERROR
-// import user from "../../server/models/user";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -38,18 +35,18 @@ const Register = () => {
         }
       );
       // console.log("REGISTER RESPONSE", data);
-      // TODO: MESSAGE THAT DISPLAYS ON SUCCESSFUL REGISTRATION
-      //  **
-      // TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
-      // toast.success("Registration successful. Please login.");
+      toast.success("Registration successful! Please login.", {
+        autoClose: 500 // 5 seconds
+      });
       // *****************
       setName("");
       setEmail("");
       setPassword("");
       setLoading(false);
+      router.push("/login");
     } catch (err) {
       // TODO: PENDIENTE DESCOMENTAR Y SOLUCIONAR ERROR
-      // toast.error(err.response.data);
+      toast.error(err.response.data);
       setLoading(false);
     }
   };

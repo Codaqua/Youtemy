@@ -73,8 +73,12 @@
   margin-left: 0 !important;
 }
 
-.bluex {
-  background: red;
+.red {
+  color: #ff0000;
+}
+
+.blue {
+  color: #0000ff;
 }
 
 /* Styles for SingleCourse page */
@@ -514,4 +518,32 @@ span {
   justify-content: flex-start;
   align-items: center;
   margin: 0 -10px;
+}
+
+/* TopNav justification columns */
+.spacer {
+  flex-grow: 1;
+}
+
+body {
+  font-size: 18px; /* You can set this to whatever size you like */
+}
+
+p {
+  margin-bottom: 0rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.nav-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aligned-center {
+  align-items: center;
+
 }

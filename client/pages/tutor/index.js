@@ -39,27 +39,24 @@ const TutorIndex = () => {
                   size={80}
                   src={course.image ? course.image.Location : "/course.png"}
                 />
-<h1> caratura de curso</h1>
                 <div className="media-body pl-2">
                   <div className="row">
                     <div className="col">
                       <h5 className="pt-2">{course.name}</h5>
-                      <p style={{ color: "red" }}> 
-                        {/* TODO: STYLES INLINE */}
-                      {/* <p style={{ marginTop: "-10px" }}> */}
-                        {course.lessons.length} Lessonsi
+                      <p className="blue"> 
+                        {course.lessons.length} Lessons
                       </p>
 
                       {course.lessons.length < 5 ? (
-                        <p style={myStyle} className="text-warning">
+                        <p className="red">
                           At least 5 lessons are required to publish a course
                         </p>
                       ) : course.published ? (
-                        <p style={myStyle} className="text-success">
+                        <p  className="text-success">
                           Your course is live in Yotemy
                         </p>
                       ) : (
-                        <p style={myStyle} className="text-success">
+                        <p className="text-success">
                           Your course is ready to be published
                         </p>
                       )}

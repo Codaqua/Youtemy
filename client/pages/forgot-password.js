@@ -62,6 +62,7 @@ const ForgotPassword = () => {
       toast("Great! Now you can login with your new password", {
         autoClose: 500 // 5 seconds
       });
+      router.push("/login");
     } catch (err) {
       setLoading(false);
       toast(err.response.data, {
