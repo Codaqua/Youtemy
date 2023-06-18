@@ -49,25 +49,6 @@ const BecomeTutor = () => {
       });
   };
 
-  // Add useEffect hook to update user role after becoming a tutor
-  // useEffect(() => {
-  //   if (user && user.role && user.role.includes("Tutor")) {
-  //     // Fetch updated account status
-  //     // endpoint returns the updated user data.
-  //     axios.post("/api/get-account-status")
-  //       .then(res => {
-  //         dispatch({
-  //           type: "LOGIN",
-  //           payload: res.data,
-  //         });
-  //         window.localStorage.setItem("user", JSON.stringify(res.data));
-  //         window.location.href = "/tutor";
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   }
-  // }, [user]);
 
   const fetchAccountStatus = () => {
     axios.post("/api/get-account-status")

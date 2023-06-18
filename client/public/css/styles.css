@@ -510,6 +510,12 @@ span {
   margin-right: 15px;
 }
 
+.margin-side-extra {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 81.4%;
+}
+
 /* Remove the media queries as they are not needed with the grid */
 
 .badges {
@@ -546,4 +552,40 @@ p {
 .aligned-center {
   align-items: center;
 
+}
+
+/* Homepage Intro */
+.header {
+  background-color: #1159b8;
+  background-image: linear-gradient(to top, #819cbf, #1159b8);
+  padding: 20px;
+  text-align: center;
+}
+
+.header__title {
+  font-size: 26px;
+  color: #FFFFFF;
+}
+
+.header__motto {
+  font-size: 24px;
+  color: #F0F0F0;
+  margin-top: 10px;
+}
+
+.intro {
+  padding: 40px;
+  text-align: left;
+  
+}
+
+.intro__text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.footer {
+  padding-bottom: 4rem;
 }

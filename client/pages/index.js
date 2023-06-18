@@ -41,22 +41,47 @@ const Index = () => {
               Youtemy Open Academy
             </h1>
           </center>
-          <center>
-            <h1>Amplía tus oportunidades profesionales</h1>
-            <p className="col-md-10 text-justify">
-              Tanto si trabajas en el segmento del aprendizaje automático o de
-              las finanzas como si deseas desarrollar tu carrera en ciencias de
-            </p>
-          </center>
+          <div className="margin-side-extra">
+            <center>
+              <header class="header">
+                <h4 class="header__title">If you want to learn, don't waste time searching. Just Learn!</h4>
+              </header>
+            </center>
+            <section class="intro">
+              <p class="intro__text">
+                Hey Students! 💡 Have you ever found yourselves buried in the
+                chaos of YouTube, looking for that one video that can help you
+                understand your lessons? Say goodbye to those days!{" "}
+                <strong>Youtemy</strong> is your new buddy, bringing you the
+                coolest and most relevant educational videos, all in one place!
+                🚀
+              </p>
+              <p class="intro__text">
+                What makes <strong>Youtemy wicked awesome?</strong> Your
+                super-smart teachers have picked out the best YouTube videos
+                that fit right into what you're studying. So, instead of digging
+                through the interwebs, you’ll have everything served up on a
+                silver platter! 🍽️
+              </p>
+              <p class="intro__text">
+                Here’s how to kick things off: Use the four rad filters at the
+                top. <strong>Just tell Youtemy what you're studying</strong>,
+                and BAM! - it's like magic, the videos you need will be right in
+                front of you. 🔮 So, what are you waiting for? <strong>Dive in and let
+                the learning extravaganza begin!</strong> 🎓
+              </p>
+            </section>
+          </div>
         </div>
       ) : null}
-      <div className="container-fluid container-centered">
+      <div className="container-fluid container-centered footer">
         <div className="block-content">
           {courses.map((course) => (
             <CourseCard key={course._id} course={course} isLoggedIn={false} />
           ))}
         </div>
       </div>
+
     </>
   );
 };

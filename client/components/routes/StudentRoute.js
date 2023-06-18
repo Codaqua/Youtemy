@@ -13,7 +13,6 @@ const StudentRoute = ({ children, showNav = true }) => {
     fetchUser();
   }, []);
 
-  // Construye el interior de cada curso *************************
 
   const fetchUser = async () => {
     try {
@@ -36,15 +35,6 @@ const StudentRoute = ({ children, showNav = true }) => {
         />
       ) : (
         <div className="container-fluid">{children}</div>
-        // <div className="container-fluid">
-        //   <div className="row">
-        //     {/* TODO : CREACIÓN COLUMNAS */}
-        //     <div className="col-md-2">
-        //       <UserNav />
-        //     </div>
-        //     <div className="col-md-10">{children}</div>
-        //   </div>
-        // </div>
       )}
     </>
   );

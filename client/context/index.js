@@ -28,7 +28,7 @@ const rootReducer = (state, action) => {
 };
 
 // context provider
-// everything that is wrapped inside the provider (_app) will have access to the state and dispatch (children props)
+
 const Provider = ({ children }) => {
   //use reducer hook
   const [state, dispatch] = useReducer(rootReducer, intialState);
@@ -43,16 +43,15 @@ const Provider = ({ children }) => {
     });
   }, []);
 
-
   // Axios. Interceptors to handling expired toke / cookies
   axios.interceptors.response.use(
     function (response) {
-      // any status code that lie within the range of 200 / 2XX cause this function
+
       // to trigger
       return response;
     },
     function (error) {
-      // any status codes that falls outside the range of 200 / 2xx cause this function
+
       // to trigger
       let res = error.response;
       if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
@@ -78,17 +77,12 @@ const Provider = ({ children }) => {
   useEffect(() => {
     const getCsrfToken = async () => {
       const { data } = await axios.get("/api/csrf-token");
-      // console.log("CSRF", data);
-      // set axios default headers with csrf token
-      // axios.defaults.headers["X-CSRF-Token"] = data.getCsrfToken;
-
       axios.defaults.headers.common["X-CSRF-Token"] = data.csrfToken;
-      // TODO: I change this after including the marked lessons
-      // axios.defaults.headers.common["csrf-token"] = data.csrfToken;
+
     };
     getCsrfToken();
   }, []);
-  
+
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );

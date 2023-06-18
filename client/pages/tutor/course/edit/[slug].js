@@ -202,32 +202,10 @@ const CourseEdit = () => {
   // const buildYouTubeUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
   const buildYouTubeUrl = (videoId) => `https://img.youtube.com/vi/${videoId}/0.jpg`;
 
-  // const handleUrlChange = (e, index) => {
-  //   let newValues = [...values.lessons];
-  //   newValues[index].video = e.target.value;
-  //   setValues({ ...values, lessons: newValues });
-  // };
-
-  // const handleUrlChange = (e, index) => {
-  //   let newVideos = [...current.videos];
-  //   newVideos[index] = e.target.value;
-  //   setCurrent({ ...current, videos: newVideos });
-  // };
-
   const addUrlField = () => {
     setCurrent({ ...current, videos: [...current.videos, ''], });
   };
 
-  // const removeUrlField = (index) => {
-  //   let newValues = [...values.lessons];
-  //   newValues.splice(index, 1);
-  //   setValues({ ...values, lessons: newValues });
-  // };
-  // const removeUrlField = (index) => {
-  //   let newVideos = [...current.videos];
-  //   newVideos.splice(index, 1);
-  //   setCurrent({ ...current, videos: newVideos });
-  // };
 
   const handleRemoveVideo = async (index) => {
     const videoUrl = current.videos[index];
@@ -252,21 +230,10 @@ const CourseEdit = () => {
    
     try {
       console.log("handleUpdateLesson try", `${slug}, ${values._id}, ${current._id}`);
-      // videoIds = current.videos.map(url => extractVideoId(url)); // convert URLs to videoIds
-      // const { data } = await axios.put(
-      //   `/api/course/lesson/${slug}/${lesson._id}`,
-      //   { ...values, videos: videoIds } // replace URLs with videoIds
-      // );
+
       const { data } = await axios.put(
-        // `/api/course/lesson/${values._id}/${current._id}`,
-        // current
         `/api/course/lesson/${slug}/${current._id}`,
         current
-        // {
-        //   title: current.title,
-        //   content: current.content,
-        //   videos: current.videos
-        // }
       );
 
       setVisible(false);

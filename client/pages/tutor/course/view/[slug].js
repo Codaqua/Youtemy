@@ -77,10 +77,6 @@ const CourseView = () => {
       );
       const videoIds = Array.from(videoIdsSet); // Convert Set back to an array
 
-      // const { data } = await axios.post(
-      //   `/api/course/lesson/${slug}/${course.tutor._id}`,
-      //   values
-      // );
       const { data } = await axios.post(
         `/api/course/lesson/${slug}/${course.tutor._id}`,
         { ...values, videos: videoIds } // replace URLs with videoIds
@@ -113,34 +109,6 @@ const CourseView = () => {
     e.preventDefault();
     setValues({ ...values, videos: [...values.videos, ""] });
   };
-
-  // const handlePublish = async (e, courseId) => {
-  //   try {
-  //     let answer = window.confirm(
-  //       "Once you publish your course, it will be live in Youtemy for students to enroll"
-  //     );
-  //     if (!answer) return;
-  //     const { data } = await axios.put(`/api/course/publish/${courseId}`);
-  //     setCourse(data);
-  //     toast("Congrats! Your course is live");
-  //   } catch (err) {
-  //     toast("Course publish failed. Try again");
-  //   }
-  // };
-
-  // const handleUnpublish = async (e, courseId) => {
-  //   try {
-  //     let answer = window.confirm(
-  //       "Once you unpublish your course, it will no be available for students to enroll"
-  //     );
-  //     if (!answer) return;
-  //     const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
-  //     setCourse(data);
-  //     toast("Your course is unpublished");
-  //   } catch (err) {
-  //     toast("Course unpublish failed. Try again");
-  //   }
-  // };
 
   const handlePublish = async (e, courseId) => {
     Modal.confirm({

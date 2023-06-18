@@ -6,15 +6,6 @@ import { Select, Button, Avatar, Badge } from "antd";
 
 const { Option } = Select;
 
-// const university = ["UOC", "UPM", "UPB", "Oviedo", "UNED"];
-
-// const degree = ["Computer Science", "Mathematics", "Physics", "Chemistry", "Biology", "Geology", "Engineering", "Architecture", "Business", "Economics", "Law", "Medicine", "Nursing", "Pharmacy", "Psychology", "Education", "Philosophy", "History", "Geography", "Literature", "Languages", "Arts", "Music", "Sports", "Other"];
-
-// const year = ["1rst", "2nd", "3rd", "4th", "5th", "6th", "Master", "Other"];
-
-// const subject = ["Algebra", "Analysis", "Geometry", "Statistics", "Probability", "Calculus", "Differential Equations", "Numerical Analysis", "Linear Algebra", "Discrete Mathematics", "Logic", "Topology", "Complex Analysis", "Functional Analysis", "Differential Geometry", "Algebraic Geometry", "Combinatorics", "Graph Theory", "Number Theory", "Set Theory", "Mathematical Physics", "Mathematical Chemistry", "Mathematical Biology", "Mathematical Economics", "Mathematical Finance", "Mathematical Psychology", "Mathematical Sociology", "Mathematical Statistics", "Mathematical Optimization", "Operations Research", "Game Theory", "Control Theory", "Information Theory", "Coding Theory", "Cryptography", "Mathematical Logic", "Mathematical Analysis", "Mathematical Modeling", "Mathematical Programming", "Mathematical Software", "Mathematical Education", "Other"];
-
-
 const CourseCreateForm = ({
   handleSubmit,
   handleImage,

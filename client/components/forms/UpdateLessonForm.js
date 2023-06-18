@@ -37,20 +37,6 @@ const UpdateLessonForm = ({
           placeholder="Content"
         ></textarea> 
 
-        {/* {current.videos.map((videoUrl, index) => (
-          <div key={index} className="mb-2">
-            <input
-              type="url"
-              className="form-control"
-              onChange={(e) => handleUrlChange(e, index)}
-              value={videoUrl}
-              placeholder="YouTube URL"
-              required
-            />
-            <Button className="btn btn-outline-danger btn-sm mt-2" onClick={() => removeUrlField(index)}>- Remove this video</Button>
-          </div>
-        ))} */}
-
 
         {current.videos && current.videos.map((videoUrl, index) => (
           <div key={index} className="mb-2">
@@ -72,9 +58,6 @@ const UpdateLessonForm = ({
             />
             {videoUrl && (
               <img 
-                // src={`https://img.youtube.com/vi/${extractVideoId(videoUrl)}/0.jpg`}
-                // src={`https://img.youtube.com/vi/${buildYouTubeUrl(videoUrl)}/default.jpg`}
-                // src={`https://img.youtube.com/vi/${videoUrl}/0.jpg`}
                 src={buildYouTubeUrl(videoUrl)}
                 alt="YouTube Thumbnail"
                 className="img-thumbnail mt-2"

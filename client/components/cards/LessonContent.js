@@ -60,11 +60,15 @@ const LessonContent = ({ lesson, courseName, markLessonCompleted, setNextLessonA
         }
     };
  
+    const isUserCoursePage = /^\/user\/course\/.+/.test(window.location.pathname);
+
     return (
         <div>
-            <center>
-            <h3 className="jumbotron text-center bg-primary square">{courseName}</h3> {/* Using courseName prop */}
-            </center>
+            {isUserCoursePage && courseName && (
+                <center>
+                    <h3 className="jumbotron text-center bg-primary square">{courseName}</h3>
+                </center>
+            )}
             <h4>{lesson.title}</h4>
 
             {/* <pre>{JSON.stringify(lesson, null, 4)}</pre> */}

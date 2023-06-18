@@ -40,9 +40,9 @@ const SingleCourseJumbotron = ({
             )}
           </div>
             {/* enroll button */}
-          <p>
+          {/* <p>
             Show enroll button
-          </p>
+          </p> */}
 
         </div>
 
@@ -89,7 +89,7 @@ const SingleCourseJumbotron = ({
           </p>
           {/* createdAt */}  {/* updatedAt */}
           <p className="text-light">
-            Created: {new Date(createdAt).toLocaleDateString()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;****|****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+            Created: {new Date(createdAt).toLocaleDateString()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
             Last updated: {new Date(updatedAt).toLocaleDateString()}
           </p>
 

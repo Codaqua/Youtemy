@@ -26,8 +26,6 @@ const UserRoute = ({ children }) => {
     }
   };
 
-    // Construye el interior de User conn 2 columns *************************
-
 
   return (
     <>

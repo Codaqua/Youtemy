@@ -28,14 +28,6 @@ const SingleCourseLessons = ({
           </Item>
         )}
       />
-      {/* <style jsx>{`
-        .lesson-item { 
-          cursor: pointer;
-        }
-        .active-lesson {
-          background-color: #f8f9fa;
-        }
-      `}</style> */}
     </div>
   );
 };
