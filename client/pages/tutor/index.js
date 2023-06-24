@@ -49,7 +49,7 @@ const TutorIndex = () => {
 
                       {course.lessons.length < 5 ? (
                         <p className="red">
-                          At least 5 lessons are required to publish a course
+                          At least 2 lessons are required to publish a course
                         </p>
                       ) : course.published ? (
                         <p  className="text-success">

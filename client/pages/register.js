@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("asdf");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const {

@@ -103,7 +103,9 @@ const CourseCreate = () => {
     <TutorRoute>
       <h1 className="jumbotron text-center square">Create Course</h1>
       <div className="pt-3 pb-3">
-        <h1>FORMULARIO CREACIÓN DE CURSOS</h1>
+        <center>
+        <h1>COURSE CREATION FORM</h1>
+        </center>
         <CourseCreateForm
           handleSubmit={handleSubmit}
           handleImage={handleImage}

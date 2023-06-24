@@ -47,7 +47,7 @@ const LessonContent = ({ lesson, courseName, markLessonCompleted, setNextLessonA
                 // console.log(`Video is at ${minutes}m ${seconds}s`);
                 // console.log(`Remaining time is ${remainingTime}s`);
 
-                if (remainingTime < 60 && videoIndex === lesson.videos.length - 1) {
+                if (remainingTime < 2 && videoIndex === lesson.videos.length - 1) {
                     // console.log("Last video is about to end, marking as completed");
                     clearInterval(event.target.interval);
                     markLessonCompleted && markLessonCompleted();  

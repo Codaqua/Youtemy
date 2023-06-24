@@ -199,7 +199,6 @@ const CourseEdit = () => {
     return null; // return null if the format is not recognized
   };
 
-  // const buildYouTubeUrl = (videoId) => `https://www.youtube.com/watch?v=${videoId}`;
   const buildYouTubeUrl = (videoId) => `https://img.youtube.com/vi/${videoId}/0.jpg`;
 
   const addUrlField = () => {

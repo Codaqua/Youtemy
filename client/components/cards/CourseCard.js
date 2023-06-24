@@ -41,17 +41,17 @@ const CourseCard = ({ course, isLoggedIn }) => {
           <div className="badges">
           <Badge
             count={university}
-            style={{ backgroundColor: "#03a9f4" }}
+            style={{ backgroundColor: "#03334a" }}
             className="pb-2 mr-2"
           />
           <Badge
             count={degree}
-            style={{ backgroundColor: "#448ff0" }}
+            style={{ backgroundColor: "#371544" }}
             className="pb-2 mr-2"
           />
           <Badge
             count={year}
-            style={{ backgroundColor: "#60ae00" }}
+            style={{ backgroundColor: "#253d08" }}
             className="pb-2 mr-2"
           />
           <Badge

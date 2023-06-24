@@ -13,17 +13,17 @@ const { EMAIL_BACKEND } = process.env;
 
 export const makeTutor = async (req, res) => {
   try {
-        // 1. find user from db
+    //  find user from db
     const user = await User.findById(req.auth._id).exec();
     // console.log("This is the Tutor USER => ", user);
 
-    // 2. if user dont have in database field "role" the value "Tutor" then add it
+    // if user dont have in database field "role" the value "Tutor" then add it
     if(!user.role.includes("Tutor")) {
       user.role.push("Tutor");
       await user.save();
     }
     
-    // 3. send email message with confirmation that now has the role "Tutor" to user
+    // send email message with confirmation that now has the role "Tutor" to user
 
     const params = {
       Source: process.env.EMAIL_FROM,

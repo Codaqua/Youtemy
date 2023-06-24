@@ -121,6 +121,7 @@ const CourseCreateForm = ({
               cols="7"
               rows="7"
               value={values.description}
+              placeholder="Course Description"
               className="form-control"
               onChange={handleChange}
             ></textarea>

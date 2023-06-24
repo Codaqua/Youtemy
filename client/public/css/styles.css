@@ -590,3 +590,7 @@ p {
   padding-bottom: 4rem;
 }
 
+/* TopNav menu labels hidden */
+.hidden-label {
+  display: none;
+}

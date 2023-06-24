@@ -9,7 +9,7 @@ const SingleCourseLessons = ({
 }) => { 
   return (
     <div className="lesson-list">
-      {lessons && <h4>{lessons.length} Lessonsa</h4>}
+      {lessons && <h4>{lessons.length} Lessons</h4>}
       <hr /> 
       <List
         itemLayout="horizontal"

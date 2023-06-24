@@ -1,0 +1,17 @@
+commands.txt
+requirements.txt
+.env.local
+.env
+
+/client/.next/
+/client/node_modules/
+/client/.env.local
+/client/aBorrar.js
+
+/server/node_modules/
+# /server/.env
+/server/aBORRAR.js
+
+**/node_modules
+**/.next
+.gitignore

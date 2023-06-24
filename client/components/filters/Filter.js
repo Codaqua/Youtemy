@@ -24,6 +24,9 @@ const Filter = ({ filterType, options }) => {
   
     return (
       <div className="filter-container">
+              <label htmlFor={`filter-${filterType}`} className="hidden-label">
+        {filterType}
+      </label>
       <Select
         showSearch
         style={{ width: 200 }}
@@ -34,6 +37,8 @@ const Filter = ({ filterType, options }) => {
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
+        id={`filter-${filterType}`}
+        aria-label={filterType}
       >
         {/* <Option value="all">All</Option> */}
         {options.map((option, index) => (

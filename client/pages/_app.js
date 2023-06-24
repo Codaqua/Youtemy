@@ -20,7 +20,9 @@ function MyApp({ Component, pageProps }) {
        <Head>
        <title>Youtemy - Your Learning Hub</title>
         <link rel="icon" href="/favicon.ico" />
+        <html lang="en" />
       </Head>
+      <h1 className="hidden-label">Youtemy - Your Learning Hub</h1>
       <DynamicToastContainer position="top-center" />
       <TopNav />
       <Component {...pageProps} />
