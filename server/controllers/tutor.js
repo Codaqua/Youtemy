@@ -122,17 +122,7 @@ try {
   if(!user.role.includes("Tutor")) {
     return res.status(401).send("Unauthorized");
   } else {
-    // if user has the role "Tutor", update the user role in the db (if needed)
-    // let updatedUser = { ...user._doc, role: "Tutor" };
-    // await User.findByIdAndUpdate(
-    //   user._id,
-    //   {
-    //     $addToSet: { role: "Tutor" },
-    //   },
-    //   { new: true }
-    // )
 
-    // if user has the role "Tutor", update the user role in the db (if needed)
     let updatedUser = await User.findByIdAndUpdate(
       user._id,
       {

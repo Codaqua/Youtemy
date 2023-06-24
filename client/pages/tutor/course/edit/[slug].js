@@ -328,9 +328,6 @@ const CourseEdit = () => {
           setCurrent={setCurrent}
           handleUpdateLesson={handleUpdateLesson}
           addUrlField={addUrlField}
-          // handleUrlChange={handleUrlChange}
-          // removeUrlField={removeUrlField}
-          // uploading={uploading}
           handleRemoveVideo={handleRemoveVideo}
           extractVideoId={extractVideoId}
           buildYouTubeUrl={buildYouTubeUrl}

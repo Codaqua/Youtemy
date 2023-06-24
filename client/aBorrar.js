@@ -10,4 +10,4 @@
     "react-dom": "^18.2.0",
     "react-image-file-resizer": "^0.4.8",
     "react-toastify": "^9.1.3"
-  }
+  } 

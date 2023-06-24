@@ -39,10 +39,6 @@ const SingleCourseJumbotron = ({
               />
             )}
           </div>
-            {/* enroll button */}
-          {/* <p>
-            Show enroll button
-          </p> */}
 
         </div>
 
